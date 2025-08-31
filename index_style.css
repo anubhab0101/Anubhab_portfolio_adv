@@ -188,7 +188,7 @@ body {
 #header h1 {
     text-align: justify;
     font-size: 2em;
-    margin: 100px 20% 0 5%;
+    margin: 100px 40% 0 5%;
     padding: 10px;
     font-family: sans-serif;
     color: rgba(255, 255, 255, 0.75);
@@ -202,14 +202,14 @@ body {
 
 /* Common Section Styling */
 .content-section {
-    background-color: rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(10px);
+    background-color: rgba(0, 0, 0, 0.326);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 20px;
     padding: 20px;
-    margin: 20px auto;
-    max-width: 1200px;
+    margin: 60px auto;
+    max-width: 1480px;
 }
 
 #about_me_sec_para1 {
@@ -271,9 +271,9 @@ body {
 
 /* Buttons */
 .live_now_bot, .live_now_bot2 {
-    background-color: #6c63ff;
+    background-color: #ffffff;
     border: none;
-    color: white;
+    color: rgb(0, 0, 0);
     padding: 12px 26px;
     text-align: center;
     text-decoration: none;
@@ -285,7 +285,7 @@ body {
     transition: background-color 0.3s, transform 0.2s;
 }
 .live_now_bot:hover, .live_now_bot2:hover {
-    background-color: #574fd8;
+    background-color: #2a2020;
     transform: translateY(-2px);
 }
 
@@ -300,7 +300,8 @@ body {
     padding: 20px;
     border-radius: 20px;
     max-width: 1200px;
-    margin: 20px auto;
+    margin: 60px auto;
+    max-width: 1480px;
 }
 #Testimonials_header {
     text-align: center;
@@ -321,17 +322,17 @@ body {
     margin-top: 30px;
 }
 .testimonial-card {
-    background: #fff;
+    background: #ffffff70;
     border-radius: 16px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     padding: 24px;
     max-width: 350px;
     flex: 1;
-    min-width: 280px; /* ensure card has a minimum width */
+    min-width: 280px; 
 }
 .testimonial-quote {
     font-size: 2em;
-    color: #3b3b3b;
+    color: #ffffff;
 }
 .testimonial-rating {
     color: #f7b500;
@@ -340,7 +341,7 @@ body {
 }
 .testimonial-text {
     font-style: italic;
-    color: #333;
+    color: #ffffff;
 }
 .testimonial-author {
     display: flex;
@@ -348,7 +349,7 @@ body {
     margin-top: 18px;
 }
 .author-initials {
-    background: #6c63ff;
+    background: #000000;
     color: #fff;
     border-radius: 50%;
     width: 48px;
@@ -366,7 +367,7 @@ body {
 }
 .author-title {
     font-size: 0.95em;
-    color: #6c63ff;
+    color: #ffffff;
 }
 
 
