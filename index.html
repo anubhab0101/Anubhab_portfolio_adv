@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anubhab's Portfolio</title>
-    <link rel="stylesheet" href="index_style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <!-- LOADER -->
@@ -22,157 +22,152 @@
 
     <!-- 3D BACKGROUND -->
     <spline-viewer id="spline-background" url="https://prod.spline.design/3fDaqfwGCnwy4ncn/scene.splinecode"></spline-viewer>
-
-    <!-- MAIN CONTENT -->
-    <div class="content-wrapper">
-        
-        <!-- NAVIGATION -->
-        <div id="navigationbar">
-            <span class="nav-name">Anubhab</span>
-            <div class="nav-links">
-                <a class="navbar-link" href="#"> HOME </a>
-                <a class="navbar-link" href="#about_me"> ABOUT ME </a>
-                <a class="navbar-link" href="#Projects"> PROJECTS </a>
-                <a class="navbar-link" href="#Testimonials"> TESTIMONIALS </a>
-                <a class="navbar-link" href="mailto:anubhabmohapatra.01@gmail.com"> CONTACT ME </a>
-            </div>
-            <div class="hamburger">
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
-            </div>
+    
+    <!-- NAVIGATION -->
+    <div id="navigationbar">
+        <span class="nav-name">Anubhab</span>
+        <div class="nav-links">
+            <a class="navbar-link" href="#home"> HOME </a>
+            <a class="navbar-link" href="#about_me_sec"> SUMMARY </a>
+            <a class="navbar-link" href="#Social_me_sec"> SOCIALS </a>
+            <a class="navbar-link" href="#about_me"> ABOUT </a>
+            <a class="navbar-link" href="#Projects"> PROJECTS </a>
+            <a class="navbar-link" href="#Testimonials"> TESTIMONIALS </a>
         </div>
+        <div class="hamburger">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+    </div>
+
+    <!-- MAIN SCROLLING CONTENT -->
+    <main id="main-content">
         
-        <!-- HEADER -->
-        <section id="header">
-            <h1>
-                <big><span class="highlight-font">I </span>am a <span class="highlight-font">Developer</span> specializing in <span class="highlight-font">Python</span>, frontend design, and <span class="highlight-font">crafting</span> clean, impactful digital <span class="highlight-font">solutions</span>.</big>
-            </h1>
+        <!-- HOME -->
+        <section id="home" class="full-page-section">
+            <div id="header">
+                <h1>
+                    <big><span class="highlight-font">I </span>am a <span class="highlight-font">Developer</span> specializing in <span class="highlight-font">Python</span>, frontend design, and <span class="highlight-font">crafting</span> clean, impactful digital <span class="highlight-font">solutions</span>.</big>
+                </h1>
+            </div>
         </section>
 
         <!-- PROFESSIONAL SUMMARY -->
-        <section id="about_me_sec" class="content-section">
-            <p id="about_me_sec_para1" >
-                <b id="about_me_sec_para1_h1"><big>Professional Summary:</big></b><br/><br/>
-                Results-driven Computer Science student specializing in AI & Data Science, with experience in Python 
-                development, full-stack applications, and cybersecurity projects. Skilled at delivering measurable 
-                results such as improving process efficiency and achieving high model accuracy. Seeking opportunities 
-                to apply technical expertise and problem-solving skills in AI, software development, or cybersecurity roles.
-            </p>
+        <section id="about_me_sec" class="full-page-section">
+            <div class="content-panel">
+                <p id="about_me_sec_para1">
+                    <b id="about_me_sec_para1_h1"><big>Professional Summary</big></b><br/><br/>
+                    Results-driven Computer Science student specializing in AI & Data Science, with experience in Python 
+                    development, full-stack applications, and cybersecurity projects. Skilled at delivering measurable 
+                    results such as improving process efficiency and achieving high model accuracy. Seeking opportunities 
+                    to apply technical expertise and problem-solving skills in AI, software development, or cybersecurity roles.
+                </p>
+            </div>
         </section>
-
-
+        
         <!-- SOCIAL MEDIA -->
-        <section id="Social_me_sec" class="content-section">
-            <a href="https://www.linkedin.com/in/anubhab-mohapatra-01-/" target="_blank"><img src="aseests/linkedin_image.jpeg" alt="LinkedIn"></a>
-            <a href="https://github.com/anubhab0101" target="_blank"><img src="aseests/Github_Image.jpeg" alt="GitHub"></a>
-            <a href="https://www.hackerrank.com/profile/www_anubhabmaha1" target="_blank" ><img src="aseests/HackerRank_Image.png" alt="HackerRank"></a>
-            <a href="https://www.instagram.com/anubhab_01_/profilecard/?igsh=NTJ4am94Mjh2cnY=" target="_blank" ><img src="aseests/Instagram_Image.png" alt="Instagram"></a>
+        <section id="Social_me_sec" class="full-page-section">
+             <div class="social-container">
+                <a href="https://www.linkedin.com/in/anubhab-mohapatra-01-/" target="_blank" class="social-icon" data-depth="0.2"><img src="aseests/linkedin_image.jpeg" alt="LinkedIn"><br>Linkedin</a>
+                <a href="https://github.com/anubhab0101" target="_blank" class="social-icon" data-depth="0.3"><img src="aseests/Github_Image.jpeg" alt="GitHub"><br>GitHub</a>
+                <a href="https://www.hackerrank.com/profile/www_anubhabmaha1" target="_blank" class="social-icon" data-depth="0.4"><img src="aseests/HackerRank_Image.png" alt="HackerRank"><br>HackerRank</a>
+                <a href="https://www.instagram.com/anubhab_01_/profilecard/?igsh=NTJ4am94Mjh2cnY=" target="_blank" class="social-icon" data-depth="0.25"><img src="aseests/Instagram_Image.png" alt="Instagram"><br>Instagram</a>
+             </div>
         </section>
-
         
         <!-- ABOUT ME & EDUCATION -->
-        <section id="about_me" class="content-section">
-            <h2> &nbsp; About Me:</h2>
-            <p>
-                Hi, I'm Anubhab — a Final-year student at CV Raman Global University who's really into Python, front-end development, and game design. I enjoy turning ideas into clean, functional code and designing user experiences that make sense. Whether I'm working on a Python backend-based website, an app, or a game, I focus on making it simple, smooth, and meaningful.
-            </p>
-            <h2> &nbsp; Education:</h2>
-            <p>
-                <big><b>Bachelor's Degree:</b></big><br/>
-                CV Raman Global University, Bhubaneswar<br/>
-                2022 - 2026<br/>
-                &nbsp;<br/>
-                <big><b>Higher Secondary Education:</b></big><br/>
-                Sakti Higher Secondary School, Cuttack<br/>
-                2020 - 2022<br/>
-            </p>
+        <section id="about_me" class="full-page-section content-align-left">
+            <div class="content-panel">
+                <h2>About Me:</h2>
+                <p>
+                    Hi, I'm Anubhab — a Final-year student at CV Raman Global University who's really into Python, front-end development, and game design. I enjoy turning ideas into clean, functional code and designing user experiences that make sense. Whether I'm working on a Python backend-based website, an app, or a game, I focus on making it simple, smooth, and meaningful.
+                </p>
+                <h2>Education:</h2>
+                <p>
+                    <big><b>Bachelor's Degree:</b></big><br/>
+                    CV Raman Global University, Bhubaneswar (2022 - 2026)
+                    <br/><br/>
+                    <big><b>Higher Secondary Education:</b></big><br/>
+                    Sakti Higher Secondary School, Cuttack (2020 - 2022)
+                </p>
+            </div>
         </section>
 
+        <!-- HORIZONTAL SCROLL CONTAINER -->
+        <section id="horizontal-scroll-container">
+            <div id="horizontal-scroll-track">
+                <!-- PROJECTS -->
+                <section id="Projects" class="horizontal-section">
+                    <div class="project-card">
+                        <h2>NLP/ML Analysis Platform</h2>
+                        <p>An NLP and ML analysis platform offering a comprehensive, user-friendly environment for ingesting, processing, and analyzing large volumes of data.</p>
+                        <p class="tech-stack"><b>Python | Streamlit | NLP | Gemini AI</b></p>
+                        <button class="live_now_bot" onclick="window.open('https://geminiintigration.streamlit.app', '_blank');">[Live Demo]</button>
+                    </div>
+                     <div class="project-card">
+                        <h2>Pneumonia Detection</h2>
+                        <p>A machine learning application that uses ML algorithms to analyze chest X-rays and automatically identify pneumonia signs for faster diagnosis.</p>
+                        <p class="tech-stack"><b>Python | TensorFlow | Computer Vision | CNN</b></p>
+                        <button class="live_now_bot" onclick="window.open('https://anubhab0101-pneumonia-detection-from-chest-x-ray-pp-qdevtn.streamlit.app/', '_blank');">[Live Demo]</button>
+                    </div>
+                    <!-- Add more project cards here if needed -->
+                </section>
 
-        <!-- PROJECTS -->
-        <section id="Projects" class="content-section">
-            <h2>
-                Here are some of my recent projects:
-            </h2>
-            <p>
-                <b><big>NLP/ML Analysis Platform-</big></b><br/>
-                An NLP and ML analysis platform offering a comprehensive, user-friendly environment for ingesting, processing, and analyzing large volumes of textual or structured data using state-of-the-art AI methodologies.<br/>
-                <b>Python &nbsp;|&nbsp; Streamlit &nbsp;|&nbsp; NLP &nbsp;|&nbsp; Machine Learning &nbsp;|&nbsp; Gemini AI</b><br/>
-            </p>
-            <button class="live_now_bot" onclick="window.open('https://geminiintigration.streamlit.app', '_blank');">
-                <b>Live Demo</b>
-            </button>
-            <p>
-                <b><big>Pneumonia Detection from Chest X-Ray-</big></b><br/>
-                A machine learning application that uses ML algorithms to analyze chest X-rays and automatically identify pneumonia signs, helping doctors diagnose quickly and accurately.<br/>
-                <b>Python &nbsp;|&nbsp; TensorFlow &nbsp;|&nbsp; Computer Vision &nbsp;|&nbsp; Healthcare AI &nbsp;|&nbsp; CNN</b><br/>
-            </p>
-            <button class="live_now_bot" onclick="window.open('https://anubhab0101-pneumonia-detection-from-chest-x-ray-pp-qdevtn.streamlit.app/', '_blank');">
-                <b>Live Demo</b>
-            </button>
+                <!-- CONTACT ME -->
+                <section id="contact-me" class="horizontal-section">
+                    <h2>Interested in collaborating?</h2>
+                    <p>Let's build something amazing together.</p>
+                    <button class="live_now_bot2" onclick="window.location.href='mailto:anubhabmohapatra.01@gmail.com';">
+                        Get In Touch!
+                    </button>
+                </section>
+            </div>
         </section>
-
-
-        <!-- CALL TO ACTION -->
-        <button class="live_now_bot2" onclick="window.location.href='mailto:anubhabmohapatra.01@gmail.com';">
-            Interested in collaborating? Let's talk!
-        </button>
 
         <!-- TESTIMONIALS -->
-        <section id="Testimonials" class="content-section">
-            <p id="Testimonials_header">
-                <big> What People Say About Me </big>
-            </p>
-            <p id="Testimonials_subheader">
-                Testimonials from colleagues, professors, and collaborators who have worked with me.
-            </p>
-            <div class="testimonials-container">
-                <div class="testimonial-card">
-                    <div class="testimonial-quote">&#10077;</div>
-                    <div class="testimonial-rating">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
-                    <p class="testimonial-text">
-                        "Anubhab's work on the pneumonia detection system was exceptional. His attention to detail and understanding of medical AI applications is impressive for someone at his level."
-                    </p>
-                    <div class="testimonial-author">
-                        <div class="author-initials">DSS</div>
-                        <div>
-                            <span class="author-name">Dr. Sarah Singh</span><br>
-                            <span class="author-title">Lead Data Scientist @ TechMed Solutions</span>
+        <section id="Testimonials" class="full-page-section">
+             <div class="content-panel">
+                <p id="Testimonials_header">What People Say About Me</p>
+                <div class="testimonials-container">
+                    <div class="testimonial-card">
+                        <div class="testimonial-quote">&#10077;</div>
+                        <p class="testimonial-text">"Anubhab's work on the pneumonia detection system was exceptional. His attention to detail is impressive."</p>
+                        <div class="testimonial-author">
+                            <div class="author-initials">DSS</div>
+                            <div>
+                                <span class="author-name">Dr. Sarah Singh</span><br>
+                                <span class="author-title">Lead Data Scientist</span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-quote">&#10077;</div>
-                    <div class="testimonial-rating">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
-                    <p class="testimonial-text">
-                        "One of the most dedicated students I've worked with. Anubhab consistently delivers high-quality projects and shows great potential in machine learning and Python development."
-                    </p>
-                    <div class="testimonial-author">
-                        <div class="author-initials">PJRS</div>
-                        <div>
-                            <span class="author-name">Prof. Jyoti Ranjan Swain</span><br>
-                            <span class="author-title">Professor of CS @ CV Raman Global University</span>
+                    <div class="testimonial-card">
+                        <div class="testimonial-quote">&#10077;</div>
+                        <p class="testimonial-text">"One of the most dedicated students I've worked with. Anubhab consistently delivers high-quality projects."</p>
+                        <div class="testimonial-author">
+                            <div class="author-initials">PJRS</div>
+                            <div>
+                                <span class="author-name">Prof. Jyoti Ranjan Swain</span><br>
+                                <span class="author-title">Professor of CS</span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-quote">&#10077;</div>
-                    <div class="testimonial-rating">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
-                    <p class="testimonial-text">
-                        "His code quality and problem-solving approach are remarkable. Definitely someone to watch in the tech space."
-                    </p>
-                    <div class="testimonial-author">
-                        <div class="author-initials">AP</div>
-                        <div>
-                            <span class="author-name">Amit Patel</span><br>
-                            <span class="author-title">Senior Software Engineer @ Innovation Labs</span>
+                    <div class="testimonial-card">
+                        <div class="testimonial-quote">&#10077;</div>
+                        <p class="testimonial-text">"His code quality and problem-solving approach are remarkable. Definitely someone to watch."</p>
+                        <div class="testimonial-author">
+                            <div class="author-initials">AP</div>
+                            <div>
+                                <span class="author-name">Amit Patel</span><br>
+                                <span class="author-title">Senior Software Engineer</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-    </div>
+        
+    </main>
 
     <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.56/build/spline-viewer.js"></script>
     <script src="script.js" defer></script>
