@@ -1,13 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // --- Loader Animation Script ---
+    // --- Loader & Initial Animations ---
+    const mainContent = document.getElementById('main-content');
     const loader = document.getElementById('loader');
     if (loader) {
-        const loaderSlider = document.getElementById('loader-slider');
-        const waveFill = document.getElementById('wave-fill');
-        const loaderPercentage = document.getElementById('loader-percentage');
         const loaderTransition = document.getElementById('loader-transition');
-        const mainContent = document.getElementById('main-content');
-
         let count = 0;
         const interval = setInterval(() => {
             if (count >= 100) {
@@ -15,9 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 startTransition();
             } else {
                 count++;
+                const loaderPercentage = document.getElementById('loader-percentage');
                 if (loaderPercentage) loaderPercentage.textContent = count + '%';
-                if (loaderSlider) loaderSlider.style.width = count + '%';
-                if (waveFill) waveFill.style.width = count + '%';
             }
         }, 20);
 
@@ -33,90 +28,89 @@ document.addEventListener('DOMContentLoaded', () => {
                         loader.style.display = 'none';
                         loaderTransition.style.display = 'none';
                         mainContent.classList.add('fade-in');
+                        // Trigger animations for elements visible on load
+                        document.querySelectorAll('.animate-on-load').forEach(el => {
+                            el.classList.add('is-visible');
+                        });
                     }, 500);
                 }, 800);
             }, 300);
         }
     }
 
-    // --- Responsive Navigation Script ---
-    const hamburger = document.querySelector('.hamburger');
-    const navLinks = document.querySelector('.nav-links');
-    const navLinksItems = document.querySelectorAll('.navbar-link');
+    // --- Custom Cursor ---
+    const cursor = document.querySelector('.cursor');
+    if (cursor) {
+        let mouseX = 0, mouseY = 0, cursorX = 0, cursorY = 0;
+        const speed = 0.1;
 
-    if (hamburger && navLinks) {
-        hamburger.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
+        const animateCursor = () => {
+            const distX = mouseX - cursorX;
+            const distY = mouseY - cursorY;
+            cursorX += distX * speed;
+            cursorY += distY * speed;
+            cursor.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0)`;
+            requestAnimationFrame(animateCursor);
+        };
+        animateCursor();
+
+        window.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
         });
     }
-    
-    if (navLinksItems && navLinks) {
-        navLinksItems.forEach(link => {
-            link.addEventListener('click', () => {
-                if (navLinks.classList.contains('active')) {
-                    navLinks.classList.remove('active');
-                }
-            });
-        });
+
+    // --- Responsive Navigation ---
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    if (hamburger && navLinks) {
+        hamburger.addEventListener('click', () => navLinks.classList.toggle('active'));
+        navLinks.addEventListener('click', () => navLinks.classList.remove('active'));
     }
 
     // --- Scroll-triggered Animations ---
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('is-visible');
+                const delay = parseInt(entry.target.getAttribute('data-delay') || '0', 10);
+                setTimeout(() => {
+                    entry.target.classList.add('is-visible');
+                }, delay);
+                observer.unobserve(entry.target);
             }
         });
-    }, { threshold: 0.4 }); // Trigger when 40% of the element is visible
+    }, { threshold: 0.2 });
 
-    // Observe social icons for staggered animation
-    const socialIcons = document.querySelectorAll('.social-icon');
-    socialIcons.forEach(icon => observer.observe(icon));
-    
+    document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
 
-    // --- Social Icons Mouse Parallax Effect ---
-    const socialSection = document.getElementById('Social_me_sec');
-    if (socialSection) {
-        socialSection.addEventListener('mousemove', (e) => {
-            const { clientX, clientY } = e;
-            const centerX = window.innerWidth / 2;
-            const centerY = window.innerHeight / 2;
-
-            const moveX = (clientX - centerX) * 0.01;
-            const moveY = (clientY - centerY) * 0.01;
-
-            socialIcons.forEach(icon => {
-                const depth = icon.getAttribute('data-depth');
-                const iconMoveX = moveX * depth;
-                const iconMoveY = moveY * depth;
-                icon.style.transform = `translate(${iconMoveX}px, ${iconMoveY}px)`;
+    // --- Project Card Hover Effect ---
+    document.querySelectorAll('.project-card').forEach(card => {
+        const prompt = card.querySelector('.view-prompt');
+        if (prompt) {
+            card.addEventListener('mousemove', e => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                prompt.style.transform = `translate3d(${x}px, ${y}px, 0)`;
             });
-        });
-    }
+        }
+    });
 
     // --- Horizontal Scrolling ---
     const horizontalContainer = document.getElementById('horizontal-scroll-container');
     const horizontalTrack = document.getElementById('horizontal-scroll-track');
-    
     if (horizontalContainer && horizontalTrack) {
         window.addEventListener('scroll', () => {
-            const containerTop = horizontalContainer.offsetTop;
-            const containerHeight = horizontalContainer.offsetHeight;
-            const windowHeight = window.innerHeight;
-            const scrollY = window.scrollY;
+            const containerRect = horizontalContainer.getBoundingClientRect();
+            const trackWidth = horizontalTrack.scrollWidth;
+            const maxTranslate = trackWidth - window.innerWidth;
 
-            if (scrollY > containerTop && scrollY < containerTop + containerHeight - windowHeight) {
-                const scrollProgress = (scrollY - containerTop) / (containerHeight - windowHeight);
-                const trackWidth = horizontalTrack.scrollWidth;
-                const maxTranslate = trackWidth - window.innerWidth;
-                
+            if (containerRect.top < 0 && containerRect.bottom > window.innerHeight) {
+                const scrollProgress = -containerRect.top / (containerRect.height - window.innerHeight);
                 let translateValue = -maxTranslate * scrollProgress;
-                // Clamp the value to prevent overscrolling
                 translateValue = Math.max(-maxTranslate, Math.min(0, translateValue));
-
                 horizontalTrack.style.transform = `translateX(${translateValue}px)`;
             }
         });
     }
 });
-
