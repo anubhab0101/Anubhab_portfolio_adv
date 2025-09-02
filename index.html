@@ -7,9 +7,6 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Wave Transition Overlay -->
-    <div id="wave-transition-overlay"></div>
-
     <!-- Custom Cursor -->
     <div class="cursor"></div>
 
@@ -18,8 +15,8 @@
         <div id="loader-slider"></div>
         <div id="loader-content">
             <h2 id="loader-name">Anubhab Mohapatra</h2>
-            <div id="wave-container">
-                <div id="wave-fill"></div>
+            <div id="loader-wave-bar">
+                <div id="loader-wave-fill"></div>
             </div>
             <p id="loader-percentage">0%</p>
         </div>
@@ -47,16 +44,18 @@
         </div>
     </div>
 
+    <!-- HEADER TEXT (positioned outside main content for proper blend mode) -->
+    <div id="header">
+        <h1 class="animate-on-load">
+            <big><span class="highlight-font">I </span>am a <span class="highlight-font">Developer</span> specializing in <span class="highlight-font">Python</span>, frontend design, and <span class="highlight-font">crafting</span> clean, impactful digital <span class="highlight-font">solutions</span>.</big>
+        </h1>
+    </div>
+
     <!-- MAIN SCROLLING CONTENT -->
     <main id="main-content">
         
         <!-- HOME -->
         <section id="home" class="full-page-section">
-            <div id="header">
-                <h1 class="animate-on-load">
-                    <big><span class="highlight-font">I </span>am a <span class="highlight-font">Developer</span> specializing in <span class="highlight-font">Python</span>, frontend design, and <span class="highlight-font">crafting</span> clean, impactful digital <span class="highlight-font">solutions</span>.</big>
-                </h1>
-            </div>
         </section>
 
         <!-- PROFESSIONAL SUMMARY -->
@@ -111,6 +110,7 @@
                         <img src="aseests/ml_analysis.png" alt="NLP/ML Analysis Platform">
                         <div class="project-info">
                              <h2>NLP/ML Analysis Platform</h2>
+                             <p class="project-description">Advanced text analysis platform powered by Gemini AI, offering sentiment analysis, text summarization, and language processing capabilities for researchers and developers.</p>
                              <p class="tech-stack"><b>Python | Streamlit | NLP | Gemini AI</b></p>
                         </div>
                         <a href="https://geminiintigration.streamlit.app" target="_blank" class="project-link"></a>
@@ -119,6 +119,7 @@
                         <img src="aseests/chest-x-ray.png" alt="Pneumonia Detection">
                          <div class="project-info">
                             <h2>Pneumonia Detection</h2>
+                            <p class="project-description">AI-powered medical imaging system that analyzes chest X-rays to detect pneumonia with high accuracy, helping healthcare professionals make faster diagnostic decisions.</p>
                             <p class="tech-stack"><b>Python | TensorFlow | Computer Vision</b></p>
                          </div>
                         <a href="https://anubhab0101-pneumonia-detection-from-chest-x-ray-pp-qdevtn.streamlit.app/" target="_blank" class="project-link"></a>
@@ -127,6 +128,7 @@
                         <img src="aseests/blackeye.png" alt="Blackeye Phishing Tool">
                          <div class="project-info">
                             <h2>Blackeye</h2>
+                            <p class="project-description">Comprehensive phishing awareness and testing tool designed for cybersecurity professionals to simulate real-world phishing attacks and train teams on threat recognition.</p>
                             <p class="tech-stack"><b>Shell Script | Automation | Cybersecurity</b></p>
                          </div>
                         <a href="https://github.com/anubhab0101/blackeye.git" target="_blank" class="project-link"></a>
@@ -135,6 +137,7 @@
                         <img src="aseests/class-sensi.png" alt="Class-sensi">
                          <div class="project-info">
                             <h2>Class-sensi</h2>
+                            <p class="project-description">Educational technology platform that automates classroom management tasks, attendance tracking, and student performance analytics to enhance learning outcomes.</p>
                             <p class="tech-stack"><b>Python | Automation | Education Tech</b></p>
                          </div>
                         <a href="https://github.com/anubhab0101/Class-sensi.git" target="_blank" class="project-link"></a>
@@ -145,7 +148,7 @@
                 <section id="contact-me" class="horizontal-section">
                     <h2 class="animate-on-scroll">Interested in collaborating?</h2>
                     <p class="animate-on-scroll" data-delay="150">Let's build something amazing together.</p>
-                    <a href="mailto:anubhabmohapatra.01@gmail.com" class="live_now_bot2 animate-on-scroll" data-delay="300">
+                    <a href="mailto:anubhabmohapatra.01@gmail.com" class="live_now_bot2 animate-on-scroll" data-delay="150">
                         Get In Touch!
                     </a>
                 </section>
@@ -188,3 +191,4 @@
     <script src="script.js" defer></script>
 </body>
 </html>
+
