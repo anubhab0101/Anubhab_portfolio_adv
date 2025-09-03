@@ -2,15 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Anubhab's Portfolio</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Custom Cursor -->
-    <div class="cursor"></div>
+    <div class="cursor">
+        <span class="cursor-text"></span>
+    </div>
 
-    <!-- LOADER -->
     <div id="loader">
         <div id="loader-slider"></div>
         <div id="loader-content">
@@ -23,10 +23,8 @@
     </div>
     <div id="loader-transition"></div>
 
-    <!-- 3D BACKGROUND -->
     <spline-viewer id="spline-background" url="https://prod.spline.design/3fDaqfwGCnwy4ncn/scene.splinecode"></spline-viewer>
     
-    <!-- NAVIGATION -->
     <div id="navigationbar">
         <span class="nav-name animate-on-load">Anubhab</span>
         <div class="nav-links animate-on-load">
@@ -36,6 +34,7 @@
             <a class="navbar-link" href="#about_me">ABOUT</a>
             <a class="navbar-link" href="#Projects">PROJECTS</a>
             <a class="navbar-link" href="#Testimonials">TESTIMONIALS</a>
+            <a class="navbar-link" href="#Contact">CONTACT</a>
         </div>
         <div class="hamburger animate-on-load">
             <div class="bar"></div>
@@ -44,21 +43,16 @@
         </div>
     </div>
 
-    <!-- HEADER TEXT (positioned outside main content for proper blend mode) -->
     <div id="header">
         <h1 class="animate-on-load">
             <big><span class="highlight-font">I </span>am a <span class="highlight-font">Developer</span> specializing in <span class="highlight-font">Python</span>, frontend design, and <span class="highlight-font">crafting</span> clean, impactful digital <span class="highlight-font">solutions</span>.</big>
         </h1>
     </div>
 
-    <!-- MAIN SCROLLING CONTENT -->
     <main id="main-content">
         
-        <!-- HOME -->
-        <section id="home" class="full-page-section">
-        </section>
+        <section id="home" class="full-page-section"></section>
 
-        <!-- PROFESSIONAL SUMMARY -->
         <section id="about_me_sec" class="full-page-section">
             <div class="content-panel">
                 <p id="about_me_sec_para1">
@@ -73,17 +67,15 @@
             </div>
         </section>
         
-        <!-- SOCIAL MEDIA -->
         <section id="Social_me_sec" class="full-page-section">
              <div class="social-container">
-                <a href="https://www.linkedin.com/in/anubhab-mohapatra-01-/" target="_blank" class="social-icon animate-on-scroll" data-delay="0"><img src="aseests/linkedin_image.jpeg" alt="LinkedIn"><br>Linkedin</a>
-                <a href="https://github.com/anubhab0101" target="_blank" class="social-icon animate-on-scroll" data-delay="150"><img src="aseests/Github_Image.jpeg" alt="GitHub"><br>GitHub</a>
-                <a href="https://www.hackerrank.com/profile/www_anubhabmaha1" target="_blank" class="social-icon animate-on-scroll" data-delay="300"><img src="aseests/HackerRank_Image.png" alt="HackerRank"><br>HackerRank</a>
-                <a href="https://www.instagram.com/anubhab_01_/profilecard/?igsh=NTJ4am94Mjh2cnY=" target="_blank" class="social-icon animate-on-scroll" data-delay="450"><img src="aseests/Instagram_Image.png" alt="Instagram"><br>Instagram</a>
+                <a href="https://www.linkedin.com/in/anubhab-mohapatra-01-/" target="_blank" class="social-icon animate-on-scroll" data-delay="0" data-cursor-text="Click"><img src="aseests/linkedin_image.jpeg" alt="LinkedIn"><br>Linkedin</a>
+                <a href="https://github.com/anubhab0101" target="_blank" class="social-icon animate-on-scroll" data-delay="150" data-cursor-text="Click"><img src="aseests/Github_Image.jpeg" alt="GitHub"><br>GitHub</a>
+                <a href="https://www.hackerrank.com/profile/www_anubhabmaha1" target="_blank" class="social-icon animate-on-scroll" data-delay="300" data-cursor-text="Click"><img src="aseests/HackerRank_Image.png" alt="HackerRank"><br>HackerRank</a>
+                <a href="https://www.instagram.com/anubhab_01_/profilecard/?igsh=NTJ4am94Mjh2cnY=" target="_blank" class="social-icon animate-on-scroll" data-delay="450" data-cursor-text="Click"><img src="aseests/Instagram_Image.png" alt="Instagram"><br>Instagram</a>
              </div>
         </section>
         
-        <!-- ABOUT ME & EDUCATION -->
         <section id="about_me" class="full-page-section content-align-left">
             <div class="content-panel">
                 <h2 class="animate-on-scroll">About Me:</h2>
@@ -101,61 +93,49 @@
             </div>
         </section>
 
-        <!-- HORIZONTAL SCROLL CONTAINER -->
-        <section id="horizontal-scroll-container">
-            <div id="horizontal-scroll-track">
-                <!-- PROJECTS -->
-                <section id="Projects" class="horizontal-section">
-                    <div class="project-card animate-on-scroll">
+        <section id="Projects" class="horizontal-scroll-container">
+             <div class="sticky-wrapper">
+                <div class="scroll-content">
+                    <div class="project-card animate-on-scroll" data-cursor-text="View">
                         <img src="aseests/ml_analysis.png" alt="NLP/ML Analysis Platform">
                         <div class="project-info">
                              <h2>NLP/ML Analysis Platform</h2>
-                             <p class="project-description">Advanced text analysis platform powered by Gemini AI, offering sentiment analysis, text summarization, and language processing capabilities for researchers and developers.</p>
+                             <p class="project-description">Advanced text analysis platform powered by Gemini AI.</p>
                              <p class="tech-stack"><b>Python | Streamlit | NLP | Gemini AI</b></p>
                         </div>
                         <a href="https://geminiintigration.streamlit.app" target="_blank" class="project-link"></a>
                     </div>
-                     <div class="project-card animate-on-scroll" data-delay="200">
+                     <div class="project-card animate-on-scroll" data-delay="200" data-cursor-text="View">
                         <img src="aseests/chest-x-ray.png" alt="Pneumonia Detection">
                          <div class="project-info">
                             <h2>Pneumonia Detection</h2>
-                            <p class="project-description">AI-powered medical imaging system that analyzes chest X-rays to detect pneumonia with high accuracy, helping healthcare professionals make faster diagnostic decisions.</p>
+                            <p class="project-description">AI-powered medical imaging system that analyzes chest X-rays.</p>
                             <p class="tech-stack"><b>Python | TensorFlow | Computer Vision</b></p>
                          </div>
                         <a href="https://anubhab0101-pneumonia-detection-from-chest-x-ray-pp-qdevtn.streamlit.app/" target="_blank" class="project-link"></a>
                     </div>
-                    <div class="project-card animate-on-scroll" data-delay="400">
+                    <div class="project-card animate-on-scroll" data-delay="400" data-cursor-text="View">
                         <img src="aseests/blackeye.png" alt="Blackeye Phishing Tool">
                          <div class="project-info">
                             <h2>Blackeye</h2>
-                            <p class="project-description">Comprehensive phishing awareness and testing tool designed for cybersecurity professionals to simulate real-world phishing attacks and train teams on threat recognition.</p>
+                            <p class="project-description">A comprehensive phishing awareness and testing tool.</p>
                             <p class="tech-stack"><b>Shell Script | Automation | Cybersecurity</b></p>
                          </div>
                         <a href="https://github.com/anubhab0101/blackeye.git" target="_blank" class="project-link"></a>
                     </div>
-                    <div class="project-card animate-on-scroll" data-delay="600">
+                    <div class="project-card animate-on-scroll" data-delay="600" data-cursor-text="View">
                         <img src="aseests/class-sensi.png" alt="Class-sensi">
                          <div class="project-info">
                             <h2>Class-sensi</h2>
-                            <p class="project-description">Educational technology platform that automates classroom management tasks, attendance tracking, and student performance analytics to enhance learning outcomes.</p>
+                            <p class="project-description">Educational platform that automates classroom management.</p>
                             <p class="tech-stack"><b>Python | Automation | Education Tech</b></p>
                          </div>
                         <a href="https://github.com/anubhab0101/Class-sensi.git" target="_blank" class="project-link"></a>
                     </div>
-                </section>
-
-                <!-- CONTACT ME -->
-                <section id="contact-me" class="horizontal-section">
-                    <h2 class="animate-on-scroll">Interested in collaborating?</h2>
-                    <p class="animate-on-scroll" data-delay="150">Let's build something amazing together.</p>
-                    <a href="mailto:anubhabmohapatra.01@gmail.com" class="live_now_bot2 animate-on-scroll" data-delay="150">
-                        Get In Touch!
-                    </a>
-                </section>
+                </div>
             </div>
         </section>
 
-        <!-- TESTIMONIALS -->
         <section id="Testimonials" class="full-page-section">
              <div class="content-panel">
                 <p id="Testimonials_header" class="animate-on-scroll">What People Say About Me</p>
@@ -185,10 +165,24 @@
             </div>
         </section>
         
+        <section id="Contact" class="full-page-section">
+            <div class="content-panel">
+                 <h2 class="animate-on-scroll">Get In Touch</h2>
+                 <p class="animate-on-scroll" data-delay="150">I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.</p>
+                 <div class="contact-details animate-on-scroll" data-delay="300">
+                    <div class="contact-item">
+                        <a href="mailto:anubhabmohapatra.01@gmail.com" data-cursor-text="Mail">anubhabmohapatra.01@gmail.com</a>
+                    </div>
+                     <div class="contact-item">
+                        <a href="tel:+918260586748" data-cursor-text="Call">+91 82605 86748</a>
+                    </div>
+                 </div>
+            </div>
+        </section>
+        
     </main>
 
     <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.56/build/spline-viewer.js"></script>
     <script src="script.js" defer></script>
 </body>
 </html>
-
