@@ -34,20 +34,20 @@ body {
     pointer-events: none;
     z-index: 9999;
     mix-blend-mode: difference;
-    transition: all 0.2s ease-out; /* Smoother transition */
+    transition: all 0.2s ease-out;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 .cursor-text {
-    font-size: 10px; /* Small text inside cursor */
+    font-size: 10px;
     color: white;
-    opacity: 0; /* Hidden by default */
+    opacity: 0;
     transition: opacity 0.2s ease-out;
     font-weight: bold;
     mix-blend-mode: difference;
 }
-/* Active state for the cursor */
+
 .cursor.active {
     width: 80px;
     height: 20px;
@@ -55,7 +55,7 @@ body {
     background-color: white;
 }
 .cursor.active .cursor-text {
-    opacity: 1; /* Show text */
+    opacity: 1;
     mix-blend-mode: difference;
 }
 
@@ -164,7 +164,7 @@ body {
 .fade-out { opacity: 0 !important; }
 
 
-/* --- Scroll & Load Animations --- */
+/* --- Scroll & Load --- */
 .animate-on-load, .animate-on-scroll {
     opacity: 0;
     transform: translateY(30px);
@@ -204,7 +204,7 @@ body {
 }
 
 
-/* --- Full Page Section Layout --- */
+/* --- Full Page Section --- */
 #main-content {
     opacity: 0;
     transition: opacity 1s ease-in-out;
@@ -232,7 +232,7 @@ body {
     width: 90%;
 }
 
-/* --- Section Specific Styles --- */
+/* --- Section Specific--- */
 
 #header {
     position: fixed;
@@ -286,7 +286,7 @@ body {
 #about_me h2 { font-size: 1.8em; }
 #about_me p { text-align: justify; font-size: 1.1em; line-height: 1.6; }
 
-/* --- HORIZONTAL SCROLL STYLES --- */
+/* --- HORIZONTAL SCROLL --- */
 .horizontal-scroll-container {
     height: 400vh;
     position: relative;
@@ -358,7 +358,7 @@ body {
 .author-name { font-weight: bold; color: #000; }
 .author-title { font-size: 0.95em; color: #6c63ff; }
 
-/* --- CONTACT SECTION STYLES --- */
+/* --- CONTACT SECTION --- */
 #Contact {
     background-color: #000;
     z-index: 7;
@@ -391,10 +391,10 @@ body {
     transition: color 0.3s ease;
 }
 .contact-item a:hover {
-    color: #6c63ff;
+    color: #1b616a;
 }
 
-/* --- Media Queries --- */
+/* --- Media Query --- */
 @media (max-width: 768px) {
     body { cursor: auto; }
     .cursor { display: none; }
@@ -402,21 +402,21 @@ body {
     .nav-links.active { display: flex; }
     .hamburger { display: flex; flex-direction: column; gap: 5px; cursor: pointer; }
 #header {
-    position: relative; /* Change from fixed to relative */
+    position: relative; 
     transform: none;
     top: 200px;
     left: 10px;
     /* padding-right: 300px; */
-    padding: 80px 20px 40px 20px; /* Add padding for spacing */
+    padding: 80px 20px 40px 20px; 
     text-align: center;
     width: 100%;
-    z-index: 1; /* Ensure it's above the background */
+    z-index: 1;
 }
 
 #header h1 {
-    font-size: 1.8em; /* Adjust font size for mobile */
+    font-size: 1.8em;
     text-align: center;
-    mix-blend-mode: difference; /* Disable blend mode on mobile for readability */
+    mix-blend-mode: difference;
     color: white;
 }
     .full-page-section { position: relative; height: auto; min-height: 100vh; }

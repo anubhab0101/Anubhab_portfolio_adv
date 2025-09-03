@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // --- Loader & Initial Animations ---
+    // --- Initial Animations ---
     const mainContent = document.getElementById('main-content');
     const loader = document.getElementById('loader');
 
@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
             mouseY = e.clientY;
         });
         
-        // --- NEW CURSOR HOVER LOGIC ---
+        // --- CURSOR HOVER LOGIC ---
         document.querySelectorAll('[data-cursor-text]').forEach(el => {
             el.addEventListener('mouseover', () => {
                 cursor.classList.add('active');
@@ -84,7 +84,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- Navigation & Smooth Scrolling ---
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
 
@@ -118,7 +117,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 2000);
     }
 
-    // --- Scroll Spy to highlight nav links ---
     function updateActiveNavLink() {
         let currentSectionId = '';
         const sections = document.querySelectorAll('.full-page-section, #Projects');
@@ -139,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     window.addEventListener('scroll', updateActiveNavLink);
 
-    // --- Scroll-triggered Animations ---
+    // --- Scroll Animations ---
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
