@@ -1,53 +1,39 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // --- Initial Animations ---
-    const mainContent = document.getElementById('main-content');
-    const loader = document.getElementById('loader');
+    const body = document.body;
 
-    if (loader) {
-        const loaderSlider = document.getElementById('loader-slider');
-        const loaderPercentage = document.getElementById('loader-percentage');
-        const waveFill = document.getElementById('loader-wave-fill');
-        const loaderTransition = document.getElementById('loader-transition');
-        let count = 0;
+    // --- Theme Switcher Logic ---
+    const themeToggle = document.getElementById('theme-toggle');
 
-        const interval = setInterval(() => {
-            if (count >= 100) {
-                clearInterval(interval);
-                startTransition();
-            } else {
-                count++;
-                if (loaderPercentage) {
-                    loaderPercentage.textContent = count + '%';
-                }
-                if (loaderSlider) {
-                    loaderSlider.style.width = count + '%';
-                }
-                if (waveFill) {
-                    waveFill.style.width = `${count}%`;
-                }
-            }
-        }, 30);
-
-        function startTransition() {
-            if (!loaderTransition || !loader || !mainContent) return;
-            loaderTransition.style.opacity = '1';
-            setTimeout(() => {
-                loaderTransition.style.backgroundColor = '#000';
-                setTimeout(() => {
-                    loader.classList.add('fade-out');
-                    loaderTransition.classList.add('fade-out');
-                    setTimeout(() => {
-                        loader.style.display = 'none';
-                        loaderTransition.style.display = 'none';
-                        mainContent.classList.add('fade-in');
-                        document.querySelectorAll('.animate-on-load').forEach(el => {
-                            el.classList.add('is-visible');
-                        });
-                    }, 500);
-                }, 800);
-            }, 300);
+    function applyTheme(theme) {
+        if (theme === 'dark') {
+            body.classList.add('dark-mode');
+        } else {
+            body.classList.remove('dark-mode');
         }
     }
+
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            const newTheme = body.classList.contains('dark-mode') ? 'light' : 'dark';
+            localStorage.setItem('theme', newTheme);
+            applyTheme(newTheme);
+        });
+    }
+
+    // --- Apply initial theme on page load ---
+    // This logic now defaults to light mode unless the user has explicitly chosen dark mode on a previous visit.
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+        applyTheme('light'); // Force light mode for all new users
+    } else {
+        applyTheme('light'); // Default to light for all new users
+    }
+
+    // --- Show elements now that loader is removed ---
+    document.querySelectorAll('.animate-on-load').forEach(el => {
+        el.classList.add('is-visible');
+    });
+
 
     // --- Custom Cursor ---
     const cursor = document.querySelector('.cursor');
@@ -71,7 +57,6 @@ document.addEventListener('DOMContentLoaded', () => {
             mouseY = e.clientY;
         });
         
-        // --- CURSOR HOVER LOGIC ---
         document.querySelectorAll('[data-cursor-text]').forEach(el => {
             el.addEventListener('mouseover', () => {
                 cursor.classList.add('active');
@@ -84,6 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // --- Navigation & Scrolling ---
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
 
@@ -114,7 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (window.location.hash) {
         setTimeout(() => {
             smoothScrollTo(window.location.hash);
-        }, 2000);
+        }, 500); // Reduced delay after removing loader
     }
 
     function updateActiveNavLink() {
