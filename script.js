@@ -35,12 +35,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-    // --- Custom Cursor ---
+    // --- Custom Cursor (Optimized) ---
     const cursor = document.querySelector('.cursor');
     const cursorText = document.querySelector('.cursor-text');
-    if (cursor) {
+    if (cursor && !window.matchMedia('(max-width: 768px)').matches) {
         let mouseX = 0, mouseY = 0, cursorX = 0, cursorY = 0;
         const speed = 0.1;
+        let rafId = null;
 
         const animateCursor = () => {
             const distX = mouseX - cursorX;
@@ -48,24 +49,31 @@ document.addEventListener('DOMContentLoaded', () => {
             cursorX += distX * speed;
             cursorY += distY * speed;
             cursor.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0)`;
-            requestAnimationFrame(animateCursor);
+            rafId = requestAnimationFrame(animateCursor);
         };
-        animateCursor();
 
+        // Throttled mousemove handler
+        let mouseMoveTimeout;
         window.addEventListener('mousemove', (e) => {
             mouseX = e.clientX;
             mouseY = e.clientY;
-        });
+            
+            if (!rafId) {
+                animateCursor();
+            }
+        }, { passive: true });
         
-        document.querySelectorAll('[data-cursor-text]').forEach(el => {
+        // Optimized cursor text handling
+        const cursorElements = document.querySelectorAll('[data-cursor-text]');
+        cursorElements.forEach(el => {
             el.addEventListener('mouseover', () => {
                 cursor.classList.add('active');
                 if(cursorText) cursorText.textContent = el.getAttribute('data-cursor-text');
-            });
+            }, { passive: true });
             el.addEventListener('mouseout', () => {
                 cursor.classList.remove('active');
                 if(cursorText) cursorText.textContent = '';
-            });
+            }, { passive: true });
         });
     }
 
@@ -123,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     window.addEventListener('scroll', updateActiveNavLink);
 
-    // --- Scroll Animations ---
+    // --- Scroll Animations (Optimized) ---
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -134,9 +142,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 observer.unobserve(entry.target);
             }
         });
-    }, { threshold: 0.2 });
+    }, { 
+        threshold: 0.1,
+        rootMargin: '50px 0px -50px 0px'
+    });
 
-    document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+    // Use requestIdleCallback for better performance
+    if ('requestIdleCallback' in window) {
+        requestIdleCallback(() => {
+            document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+        });
+    } else {
+        setTimeout(() => {
+            document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+        }, 100);
+    }
 
     if (hamburger && navLinks) {
         hamburger.addEventListener('click', () => navLinks.classList.toggle('active'));
@@ -167,6 +187,24 @@ document.addEventListener('DOMContentLoaded', () => {
         scrollContent.style.transform = `translateX(${translateValue}px)`;
     }
 
-    window.addEventListener('scroll', handleHorizontalScroll);
-    window.addEventListener('resize', handleHorizontalScroll);
+    // Throttled scroll and resize handlers
+    let scrollTimeout;
+    let resizeTimeout;
+    
+    window.addEventListener('scroll', () => {
+        if (scrollTimeout) return;
+        scrollTimeout = setTimeout(() => {
+            handleHorizontalScroll();
+            updateActiveNavLink();
+            scrollTimeout = null;
+        }, 16); // ~60fps
+    }, { passive: true });
+    
+    window.addEventListener('resize', () => {
+        if (resizeTimeout) return;
+        resizeTimeout = setTimeout(() => {
+            handleHorizontalScroll();
+            resizeTimeout = null;
+        }, 100);
+    }, { passive: true });
 });

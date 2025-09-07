@@ -12,6 +12,19 @@
     --border-dark: rgba(255, 255, 255, 0.2);
 }
 
+/* Performance optimizations */
+* {
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
 html {
     scroll-behavior: smooth;
 }
@@ -34,6 +47,7 @@ body.dark-mode {
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
     display: none;
+    contain: layout style paint;
 }
 
 body.dark-mode #spline-background {
@@ -53,7 +67,7 @@ body.dark-mode #spline-background {
 .cursor.active { width: 80px; height: 20px; border-radius: 0; background-color: white; }
 .cursor.active .cursor-text { opacity: 1; mix-blend-mode: difference; }
 
-* { box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+/* Removed duplicate box-sizing rule - now handled above */
 
 /* --- Scroll & Load --- */
 .animate-on-load, .animate-on-scroll {
