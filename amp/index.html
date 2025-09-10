@@ -24,6 +24,7 @@
 
     <script async src="https://cdn.ampproject.org/v0.js"></script>
     <script async custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js"></script>
+    <script async custom-element="amp-base-carousel" src="https://cdn.ampproject.org/v0/amp-base-carousel-0.1.js"></script>
     <style amp-boilerplate>
         body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}
         @-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}
@@ -317,6 +318,28 @@ body.dark-mode .contact-item a:hover { color: #38bdf8; }
     #header { position: relative; transform: none; top: 200px; left: auto; padding: 80px 20px 40px 20px; text-align: center; width: 100%; z-index: 1; }
     #header h1 { font-size: 1.8em; text-align: center; }
     .full-page-section { min-height: 100vh; }
+    /* Enable horizontal scroll with snap on mobile */
+    .scroll-content {
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
+        width: 100%;
+        height: auto;
+        padding: 40px 16px;
+        gap: 16px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+    }
+    .project-card {
+        flex: 0 0 85%;
+        width: 85%;
+        max-width: none;
+        height: auto;
+        min-height: 500px;
+        scroll-snap-align: start;
+    }
 }
 
 @media (max-width: 480px) {
@@ -401,7 +424,13 @@ body.dark-mode .contact-item a:hover { color: #38bdf8; }
 
         <section id="Projects" class="horizontal-scroll-container">
             <div class="sticky-wrapper">
-                <div class="scroll-content">
+                <amp-base-carousel 
+                    height="600"
+                    layout="fixed-height"
+                    snap="true"
+                    controls="always"
+                    visible-count="1"
+                    advance-count="1">
                     <div class="project-card">
                         <amp-img src="../aseests/ml_analysis.png" alt="NLP/ML Analysis Platform - Advanced text analysis dashboard powered by Gemini AI" width="450" height="300" layout="responsive"></amp-img>
                         <div class="project-info">
@@ -447,7 +476,7 @@ body.dark-mode .contact-item a:hover { color: #38bdf8; }
                         </div>
                         <a href="https://github.com/anubhab0101/Software-Realibility-Prediction-model-for-imbalance-dataset.git" target="_blank" class="project-link" rel="noopener"></a>
                     </div>
-                </div>
+                </amp-base-carousel>
             </div>
         </section>
 

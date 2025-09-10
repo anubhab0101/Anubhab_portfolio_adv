@@ -207,4 +207,33 @@ document.addEventListener('DOMContentLoaded', () => {
             resizeTimeout = null;
         }, 100);
     }, { passive: true });
+
+    // --- Horizontal scroll buttons for mobile ---
+    const leftBtn = document.querySelector('#Projects .scroll-btn.left');
+    const rightBtn = document.querySelector('#Projects .scroll-btn.right');
+    function updateScrollButtons() {
+        if (!scrollContent || !leftBtn || !rightBtn) return;
+        const maxScrollLeft = scrollContent.scrollWidth - scrollContent.clientWidth;
+        const atStart = scrollContent.scrollLeft <= 1;
+        const atEnd = scrollContent.scrollLeft >= maxScrollLeft - 1;
+        leftBtn.classList.toggle('disabled', atStart);
+        rightBtn.classList.toggle('disabled', atEnd);
+    }
+
+    function scrollByCard(direction) {
+        if (!scrollContent) return;
+        // Determine approximate card width including gap
+        const card = scrollContent.querySelector('.project-card');
+        const gap = parseInt(getComputedStyle(scrollContent).columnGap || getComputedStyle(scrollContent).gap || '16', 10);
+        const delta = (card ? card.clientWidth : window.innerWidth * 0.85) + gap;
+        scrollContent.scrollBy({ left: direction * delta, behavior: 'smooth' });
+        // Update button state after the smooth scroll ends
+        setTimeout(updateScrollButtons, 400);
+    }
+    if (leftBtn && rightBtn) {
+        leftBtn.addEventListener('click', () => scrollByCard(-1));
+        rightBtn.addEventListener('click', () => scrollByCard(1));
+        scrollContent && scrollContent.addEventListener('scroll', updateScrollButtons, { passive: true });
+        updateScrollButtons();
+    }
 });
