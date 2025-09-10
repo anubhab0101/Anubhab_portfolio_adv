@@ -1,0 +1,501 @@
+<!doctype html>
+<html amp lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <title>Anubhab Mohapatra - Python Developer & AI Specialist | Portfolio (AMP)</title>
+    <link rel="canonical" href="https://anubhabmohapatra.in/">
+    <meta name="description" content="Anubhab Mohapatra - Computer Science student specializing in Python development, AI, Data Science, and full-stack applications. View my portfolio showcasing pneumonia detection AI, NLP platforms, and cybersecurity projects.">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Anubhab Mohapatra - Python Developer & AI Specialist">
+    <meta property="og:description" content="Computer Science student specializing in Python development, AI, Data Science, and full-stack applications. View my portfolio showcasing innovative projects.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://anubhabmohapatra.in">
+    <meta property="og:image" content="https://anubhabmohapatra.in/aseests/Anubhab.png">
+    <meta property="og:site_name" content="Anubhab's Portfolio">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Anubhab Mohapatra - Python Developer & AI Specialist">
+    <meta name="twitter:description" content="Computer Science student specializing in Python development, AI, Data Science, and full-stack applications.">
+    <meta name="twitter:image" content="https://anubhabmohapatra.in/aseests/Anubhab.png">
+
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <script async custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js"></script>
+    <style amp-boilerplate>
+        body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}
+        @-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}
+        @-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}
+        @-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}
+        @-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}
+        @keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}
+    </style>
+    <noscript>
+        <style amp-boilerplate>
+            body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}
+        </style>
+    </noscript>
+
+    <amp-state id="ui">
+        <script type="application/json">
+        { "dark": false }
+        </script>
+    </amp-state>
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Anubhab Mohapatra",
+        "jobTitle": "Computer Science Student & Python Developer",
+        "description": "Computer Science student specializing in Python development, AI, Data Science, and full-stack applications",
+        "url": "https://anubhabmohapatra.in",
+        "image": "https://anubhabmohapatra.in/aseests/Anubhab.png",
+        "email": "anubhabmohapatra.01@gmail.com",
+        "telephone": "+91-82605-86748",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Cuttack",
+            "addressRegion": "Odisha",
+            "addressCountry": "India"
+        },
+        "alumniOf": {
+            "@type": "EducationalOrganization",
+            "name": "CV Raman Global University"
+        },
+        "knowsAbout": [
+            "Python Programming",
+            "Artificial Intelligence",
+            "Data Science",
+            "Machine Learning",
+            "Full Stack Development",
+            "Cybersecurity",
+            "Computer Vision",
+            "Natural Language Processing"
+        ],
+        "sameAs": [
+            "https://www.linkedin.com/in/anubhab-mohapatra-01-/",
+            "https://github.com/anubhab0101",
+            "https://www.hackerrank.com/profile/www_anubhabmaha1"
+        ]
+    }
+    </script>
+
+    <style amp-custom>
+/* --- Base, Loader, and Background Styles --- */
+:root {
+    --bg-light: #f4f4f4;
+    --text-light: #000000; /* Pure black for light mode text */
+    --panel-light: rgba(255, 255, 255, 0.7);
+    --border-light: rgba(0, 0, 0, 0.1);
+    --card-light: #efefefe6;
+
+    --bg-dark: #000;
+    --text-dark: #ffffff; /* White for dark mode text */
+    --panel-dark: rgba(30, 30, 30, 0.8);
+    --border-dark: rgba(255, 255, 255, 0.2);
+}
+
+/* Performance optimizations */
+* {
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+body {
+    margin: 0;
+    background-color: var(--bg-light);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--text-light);
+    overflow-x: hidden;
+    transition: background-color 0.4s ease, color 0.4s ease;
+}
+body.dark-mode {
+    background-color: var(--bg-dark);
+    color: var(--text-dark);
+}
+
+#spline-background { display: none; }
+
+/* --- Custom Cursor --- */
+.cursor {
+    width: 25px; height: 25px; border: 2px solid white; border-radius: 50%;
+    position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999;
+    mix-blend-mode: difference; transition: all 0.2s ease-out;
+    display: none; /* Hidden on AMP to avoid confusion without JS */
+}
+.cursor-text { font-size: 10px; color: white; opacity: 0; transition: opacity 0.2s ease-out; font-weight: bold; mix-blend-mode: difference; }
+.cursor.active { width: 80px; height: 20px; border-radius: 0; background-color: white; }
+.cursor.active .cursor-text { opacity: 1; mix-blend-mode: difference; }
+
+/* --- Scroll & Load --- */
+.animate-on-load, .animate-on-scroll {
+    opacity: 1; transform: none; /* static on AMP */
+}
+.is-visible { opacity: 1; transform: none; }
+
+/* --- Navigation Bar --- */
+#navigationbar {
+    position: fixed; top: 0; left: 0; width: 100%; display: flex;
+    justify-content: space-between; align-items: center; padding: 20px 40px;
+    z-index: 100; box-sizing: border-box;
+}
+.nav-right { display: flex; align-items: center; gap: 25px; }
+.nav-name { font-size: 1.5em; font-weight: bold; }
+.nav-brand-link { text-decoration: none; color: var(--text-light); }
+body.dark-mode .nav-brand-link { color: var(--text-dark); }
+.nav-links { display: flex; gap: 25px; }
+.navbar-link { text-decoration: none; color: var(--text-light); font-weight: bold; padding: 5px; position: relative; }
+body.dark-mode .navbar-link { color: var(--text-dark); }
+.navbar-link::after { content: ''; position: absolute; width: 100%; height: 1px; bottom: 0; left: 0; background-color: var(--text-light); transform: scaleX(0); transform-origin: bottom right; transition: transform 0.3s ease-out; }
+body.dark-mode .navbar-link::after { background-color: var(--text-dark); }
+.navbar-link:hover::after { transform: scaleX(1); transform-origin: bottom left; }
+.navbar-link.active::after { transform: scaleX(1); transform-origin: bottom left; }
+.navbar-link.active { color: #ffd700 !important; }
+.hamburger { display: none; }
+.hamburger .bar { width: 25px; height: 3px; background-color: var(--text-light); border-radius: 5px; }
+body.dark-mode .hamburger .bar { background-color: var(--text-dark); }
+
+/* --- Theme Toggle --- */
+#theme-toggle { width: 24px; height: 24px; position: relative; }
+#theme-toggle svg { position: absolute; width: 100%; height: 100%; color: var(--text-light); }
+body.dark-mode #theme-toggle svg { color: var(--text-dark); }
+#theme-toggle .sun { opacity: 0; transform: scale(0.8); }
+#theme-toggle .moon { opacity: 1; transform: scale(1); }
+body.dark-mode #theme-toggle .sun { opacity: 1; transform: scale(1); }
+body.dark-mode #theme-toggle .moon { opacity: 0; transform: scale(0.8); }
+
+/* --- Main Content --- */
+#main-content { opacity: 1; }
+.full-page-section {
+    position: relative; width: 100vw; min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    align-items: center; padding: 20px; box-sizing: border-box;
+}
+.content-panel {
+    background-color: var(--panel-light); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border-light); border-radius: 20px;
+    padding: 40px; max-width: 1480px; width: 90%;
+    transition: background-color 0.4s ease, border-color 0.4s ease;
+}
+body.dark-mode .content-panel { background-color: var(--panel-dark); border: 1px solid var(--border-dark); }
+
+/* --- Section Specific--- */
+#header {
+    position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 90%; max-width: 800px; z-index: 0; pointer-events: none;
+    display: flex; justify-content: center; align-items: center; background: rgba(0,0,0,0);
+}
+#header h1 {
+    text-align: justify; font-size: 2.5em; width: 100%; background: transparent;
+    position: relative; z-index: 1; transform: translateZ(0);
+    color: var(--text-light);font-family: Courier New;
+}
+body.dark-mode #header h1 { color: var(--text-dark); }
+.highlight-font { font-family:Georgia, 'Times New Roman', Times, serif; font-weight: 500; }
+#home { background-color: transparent; z-index: -1; }
+
+#about_me_sec { background-color: #ffffff; color: var(--text-light); z-index: 2; }
+body.dark-mode #about_me_sec { background-color: #111111; color: #f0f0f0; }
+#about_me_sec .content-panel { background-color: transparent; border: none; backdrop-filter: none; }
+#about_me_sec_para1 { text-align: justify; font-size: 1.2em; }
+#about_me_sec_para1_h1 { font-size: 1.8em; text-align: center; display: block; margin-bottom: 20px; }
+
+#Social_me_sec { background-color: var(--bg-light); z-index: 3; }
+body.dark-mode #Social_me_sec { background-color: var(--bg-dark); }
+.social-container { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 60px; }
+.social-icon { display: flex; flex-direction: column; align-items: center; text-decoration: none; color: var(--text-light); }
+body.dark-mode .social-icon { color: var(--text-dark); }
+.social-icon:nth-child(2), .social-icon:nth-child(4) { margin-top: 80px; }
+.social-icon img { border-radius: 50%; width: 60px; height: 60px; margin-bottom: 8px; }
+
+#about_me { background-color: #ffffff; color: var(--text-light); z-index: 4; }
+body.dark-mode #about_me { background-color: #111111; color: #f0f0f0; }
+.content-align-left { align-items: flex-start; }
+#about_me .content-panel { margin-left: 5%; background-color: transparent; border: none; backdrop-filter: none; }
+#about_me h2 { font-size: 1.8em; }
+#about_me p { text-align: justify; font-size: 1.1em; line-height: 1.6; }
+
+/* --- HORIZONTAL SCROLL --- */
+.horizontal-scroll-container { position: relative; background-color: #ffffff; z-index: 5; }
+body.dark-mode .horizontal-scroll-container { background-color: var(--bg-dark); }
+.sticky-wrapper { position: static; height: auto; width: 100%; overflow-x: hidden; }
+.scroll-content { height: 100%; width: 100%; display: flex; align-items: center; gap: 60px; padding: 80px 24px; flex-direction: column; }
+
+.project-card {
+    background-color: var(--card-light);
+    border: 1px solid #616161;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    border-radius: 20px;
+    padding: 50px;
+    width: 450px;
+    min-height: 550px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+    transition: background-color 0.4s ease, border-color 0.4s ease;
+    color: var(--text-light);
+}
+body.dark-mode .project-card {
+    background-color: var(--panel-dark);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border-dark);
+    box-shadow: none;
+    color: var(--text-dark);
+}
+.project-card h2 {
+    font-size: 1em;
+    margin-bottom: 10px;
+    text-align: center;
+}
+.project-description {
+    font-size: 0.9em;
+    line-height: 1.7;
+    margin-bottom: 30px;
+    text-align: center;
+    flex-grow: 1;
+    padding: 0 10px;
+    color: var(--text-light);
+}
+body.dark-mode .project-description { color: #ccc; }
+.tech-stack { font-size: 0.7em; text-align: center; margin-top: auto; padding: 0 10px; color: var(--text-light); }
+body.dark-mode .tech-stack { color: var(--text-dark); }
+.project-link { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+
+#Testimonials { background-color: var(--bg-light); color: var(--text-light); z-index: 6; }
+body.dark-mode #Testimonials { background-color: #111111; color: var(--text-dark); }
+body.dark-mode .testimonial-text { color: #ffffff; }
+body.dark-mode .author-name { color: #ffffff; }
+body.dark-mode .author-title { color: #cccccc; }
+body.dark-mode .author-initials { background: #666666; color: #ffffff; }
+#Testimonials_header { font-size: 2em; text-align: center; margin-bottom: 30px; }
+.testimonials-container { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; }
+.testimonial-card { background: #fff; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); padding: 24px; max-width: 350px; flex: 1 1 280px; min-width: 280px; }
+body.dark-mode .testimonial-card { background: #2a2a2a; box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
+.testimonial-text { font-style: italic; color: #000000; }
+.testimonial-author { display: flex; align-items: center; margin-top: 18px; }
+.author-initials { background: #4a4a4a; color: #ffffff; border-radius: 50%; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 12px; }
+.author-name { font-weight: bold; color: #000000; }
+.author-title { font-size: 0.95em; color: #2c2c2c; font-weight: 600; }
+
+/* --- CONTACT SECTION --- */
+#Contact { background-color: var(--bg-light); z-index: 7; text-align: center; }
+body.dark-mode #Contact { background-color: var(--bg-dark); }
+#Contact .content-panel { background-color: transparent; border: none; backdrop-filter: none; }
+#Contact h2 { font-size: 2.5em; margin-bottom: 20px; }
+#Contact p { font-size: 1.1em; max-width: 600px; margin: 0 auto 40px auto; color: #000000; }
+body.dark-mode #Contact p { color: #ccc; }
+.contact-details { display: flex; flex-direction: column; gap: 20px; font-size: 1.5em; }
+.contact-item a { text-align: center; color: var(--text-light); text-decoration: none; transition: color 0.3s ease; }
+body.dark-mode .contact-item a { color: var(--text-dark); }
+.contact-item a:hover { color: #1b616a; }
+body.dark-mode .contact-item a:hover { color: #38bdf8; }
+
+/* --- Media Query --- */
+@media (max-width: 768px) {
+    .content-panel { padding: 32px 24px; }
+    #navigationbar { background-color: rgba(255, 255, 255, 0.5); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); padding: 15px 20px; }
+    body.dark-mode #navigationbar { background-color: rgba(30, 30, 30, 0.5); }
+    .nav-links { display: none; }
+    .hamburger { display: none; }
+    #header { position: relative; transform: none; top: 200px; left: auto; padding: 80px 20px 40px 20px; text-align: center; width: 100%; z-index: 1; }
+    #header h1 { font-size: 1.8em; text-align: center; }
+    .full-page-section { min-height: 100vh; }
+}
+
+@media (max-width: 480px) {
+    #about_me_sec_para1 { font-size: 1em; }
+    #about_me h2 { font-size: 1.5em; }
+    #about_me p { font-size: 1em; }
+    .project-card { padding: 20px; }
+    .testimonials-container { gap: 15px; }
+    .testimonial-card { flex-basis: 100%; min-width: 0; }
+    .content-panel { padding: 24px 16px; }
+    #Contact h2 { font-size: 2em; }
+    .contact-details { font-size: 1.2em; }
+}
+    </style>
+</head>
+<body [class]="ui.dark ? 'dark-mode' : ''">
+    <!-- Removed Spline viewer and all custom JS for AMP compliance -->
+    <div id="navigationbar">
+        <span class="nav-name"><a href="https://anubhabmohapatra.in" class="nav-brand-link">Anubhab</a></span>
+        <div class="nav-right">
+            <div class="nav-links">
+                <a class="navbar-link" href="#home">HOME</a>
+                <a class="navbar-link" href="#about_me_sec">SUMMARY</a>
+                <a class="navbar-link" href="#Social_me_sec">SOCIALS</a>
+                <a class="navbar-link" href="#about_me">ABOUT</a>
+                <a class="navbar-link" href="#Projects">PROJECTS</a>
+                <a class="navbar-link" href="#Testimonials">TESTIMONIALS</a>
+                <a class="navbar-link" href="#Contact">CONTACT</a>
+            </div>
+            <div id="theme-toggle" role="button" tabindex="0" aria-label="Toggle theme" on="tap:AMP.setState({ ui: { dark: !ui.dark } })">
+                <!-- Decorative icons kept as static SVGs -->
+                <svg class="sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.25a.75.75 0 0 1 .75.75v2.25a.75.75 0 0 1-1.5 0V3a.75.75 0 0 1 .75-.75ZM7.5 12a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM18.894 6.106a.75.75 0 0 1 0 1.06l-1.591 1.592a.75.75 0 0 1-1.06-1.061l1.591-1.591a.75.75 0 0 1 1.06 0ZM21.75 12a.75.75 0 0 1-.75.75h-2.25a.75.75 0 0 1 0-1.5h2.25a.75.75 0 0 1 .75.75ZM17.803 17.803a.75.75 0 0 1-1.06 0l-1.591-1.591a.75.75 0 1 1 1.06-1.06l1.591 1.591a.75.75 0 0 1 0 1.06ZM12 21a.75.75 0 0 1-.75-.75v-2.25a.75.75 0 0 1 1.5 0v2.25a.75.75 0 0 1-.75.75ZM5.106 18.894a.75.75 0 0 1 0-1.06l1.591-1.592a.75.75 0 0 1 1.06 1.061l-1.591 1.591a.75.75 0 0 1-1.06 0ZM4.5 12a.75.75 0 0 1 .75-.75h2.25a.75.75 0 0 1 0 1.5H5.25a.75.75 0 0 1-.75-.75ZM6.106 5.106a.75.75 0 0 1 1.06 0l1.591 1.591a.75.75 0 1 1-1.06 1.06l-1.591-1.591a.75.75 0 0 1 0-1.06Z" /></svg>
+                <svg class="moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 0 1 .162.819A8.97 8.97 0 0 0 9 6a9 9 0 0 0 9 9 8.97 8.97 0 0 0 3.463-.69.75.75 0 0 1 .981.981A10.503 10.503 0 0 1 18 18a10.5 10.5 0 0 1-10.5-10.5c0-1.61.362-3.14.993-4.522a.75.75 0 0 1 .819-.162Z" clip-rule="evenodd" /></svg>
+            </div>
+        </div>
+    </div>
+
+    <div id="header">
+        <h1>
+            <big><span class="highlight-font">I </span>am a <span class="highlight-font">Developer</span> specializing in <span class="highlight-font">Python</span>, frontend design, and <span class="highlight-font">crafting</span> clean, impactful digital <span class="highlight-font">solutions</span>.</big>
+        </h1>
+    </div>
+
+    <main id="main-content">
+        <section id="home" class="full-page-section"></section>
+
+        <section id="about_me_sec" class="full-page-section">
+            <div class="content-panel">
+                <p id="about_me_sec_para1">
+                    <b id="about_me_sec_para1_h1"><big>Professional Summary</big></b><br/><br/>
+                    <span>
+                    Computer Science student focused on AI and Data Science, experienced in Python development, full-stack applications, and cybersecurity projects. Good at delivering results, like improving process efficiency and achieving high model accuracy. Looking for chances to use technical skills and solve problems in AI and software development.
+                    </span>
+                </p> 
+            </div>
+        </section>
+
+        <section id="Social_me_sec" class="full-page-section">
+            <div class="social-container">
+                <a href="https://www.linkedin.com/in/anubhab-mohapatra-01-/" target="_blank" class="social-icon"><amp-img src="../aseests/linkedin_image.jpeg" alt="Anubhab Mohapatra LinkedIn Profile" width="60" height="60" layout="intrinsic"></amp-img><br>Linkedin</a>
+                <a href="https://github.com/anubhab0101" target="_blank" class="social-icon"><amp-img src="../aseests/Github_Image.jpeg" alt="Anubhab Mohapatra GitHub Profile" width="60" height="60" layout="intrinsic"></amp-img><br>GitHub</a>
+                <a href="https://www.hackerrank.com/profile/www_anubhabmaha1" target="_blank" class="social-icon"><amp-img src="../aseests/HackerRank_Image.png" alt="Anubhab Mohapatra HackerRank Profile" width="60" height="60" layout="intrinsic"></amp-img><br>HackerRank</a>
+            </div>
+        </section>
+
+        <section id="about_me" class="full-page-section content-align-left">
+            <div class="content-panel">
+                <h2>About Me:</h2>
+                <p>
+                    Hi, I'm Anubhab — a Final-year student at CV Raman Global University who's really into Python, front-end development, and game design. I enjoy turning ideas into clean, functional code and designing user experiences that make sense.
+                </p>
+                <h2>Education:</h2>
+                <p>
+                    <big><b>Bachelor's Degree:</b></big><br/>
+                    CV Raman Global University, Bhubaneswar (2022 - 2026)
+                    <br/><br/>
+                    <big><b>Higher Secondary Education:</b></big><br/>
+                    Sakti Higher Secondary School, Cuttack (2020 - 2022)
+                </p>
+            </div>
+        </section>
+
+        <section id="Projects" class="horizontal-scroll-container">
+            <div class="sticky-wrapper">
+                <div class="scroll-content">
+                    <div class="project-card">
+                        <amp-img src="../aseests/ml_analysis.png" alt="NLP/ML Analysis Platform - Advanced text analysis dashboard powered by Gemini AI" width="450" height="300" layout="responsive"></amp-img>
+                        <div class="project-info">
+                             <h2>NLP/ML Analysis Platform</h2>
+                             <p class="project-description">Advanced text analysis platform powered by Gemini AI.</p>
+                             <p class="tech-stack"><b>Python | Streamlit | NLP | Gemini AI</b></p>
+                        </div>
+                        <a href="https://geminiintigration.streamlit.app" target="_blank" class="project-link" rel="noopener"></a>
+                    </div>
+                    <div class="project-card">
+                        <amp-img src="../aseests/chest-x-ray.png" alt="Pneumonia Detection AI - Chest X-ray analysis interface showing medical imaging results" width="450" height="300" layout="responsive"></amp-img>
+                        <div class="project-info">
+                            <h2>Pneumonia Detection</h2>
+                            <p class="project-description">AI-powered medical imaging system that analyzes chest X-rays.</p>
+                            <p class="tech-stack"><b>Python | TensorFlow | Computer Vision</b></p>
+                        </div>
+                        <a href="https://anubhab0101-pneumonia-detection-from-chest-x-ray-pp-qdevtn.streamlit.app/" target="_blank" class="project-link" rel="noopener"></a>
+                    </div>
+                    <div class="project-card">
+                        <amp-img src="../aseests/blackeye.png" alt="Blackeye Cybersecurity Tool - Phishing awareness and testing platform interface" width="450" height="300" layout="responsive"></amp-img>
+                        <div class="project-info">
+                            <h2>Blackeye</h2>
+                            <p class="project-description">A comprehensive phishing awareness and testing tool.</p>
+                            <p class="tech-stack"><b>Shell Script | Automation | Cybersecurity</b></p>
+                        </div>
+                        <a href="https://github.com/anubhab0101/blackeye.git" target="_blank" class="project-link" rel="noopener"></a>
+                    </div>
+                    <div class="project-card">
+                        <amp-img src="../aseests/class-sensi.png" alt="Class-sensi Educational Platform - Classroom management automation dashboard" width="450" height="300" layout="responsive"></amp-img>
+                        <div class="project-info">
+                            <h2>Class-sensi</h2>
+                            <p class="project-description">Educational platform that automates classroom management.</p>
+                            <p class="tech-stack"><b>Python | Automation | Education Tech</b></p>
+                        </div>
+                        <a href="https://github.com/anubhab0101/Class-sensi.git" target="_blank" class="project-link" rel="noopener"></a>
+                    </div>
+                    <div class="project-card">
+                        <amp-img src="../aseests/imbalance-dataset.png" alt="Software Reliability Prediction Model - Machine learning dashboard for imbalanced dataset analysis" width="450" height="300" layout="responsive"></amp-img>
+                        <div class="project-info">
+                            <h2>Software Realibility Prediction model for imbalance dataset</h2>
+                            <p class="project-description">A full-stack machine learning system for predicting software reliability on highly imbalanced datasets. Includes data preprocessing, model training/evaluation.</p>
+                            <p class="tech-stack"><b>React + TypeScript | Node.js + Express | Python | Tailwind CSS</b></p>
+                        </div>
+                        <a href="https://github.com/anubhab0101/Software-Realibility-Prediction-model-for-imbalance-dataset.git" target="_blank" class="project-link" rel="noopener"></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="Testimonials" class="full-page-section">
+            <div class="content-panel">
+                <p id="Testimonials_header">What People Say About Me</p>
+                <div class="testimonials-container">
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"Anubhab's work on the pneumonia detection system was exceptional. His attention to detail is impressive."</p>
+                        <div class="testimonial-author">
+                            <div class="author-initials">DSS</div>
+                            <div><span class="author-name">Dr. Sarah Singh</span><br><span class="author-title">Lead Data Scientist</span></div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"One of the most dedicated students I've worked with. Anubhab consistently delivers high-quality projects."</p>
+                        <div class="testimonial-author">
+                            <div class="author-initials">PJRS</div>
+                            <div><span class="author-name">Prof. Jyoti Ranjan Swain</span><br><span class="author-title">Professor of CS</span></div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"His code quality and problem-solving approach are remarkable. Definitely someone to watch."</p>
+                        <div class="testimonial-author">
+                            <div class="author-initials">AP</div>
+                            <div><span class="author-name">Amit Patel</span><br><span class="author-title">Senior Software Engineer</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="Contact" class="full-page-section">
+            <div class="content-panel">
+                <h2>Get In Touch</h2>
+                <p>I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.</p>
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <a href="mailto:anubhabmohapatra.01@gmail.com">anubhabmohapatra.01@gmail.com</a>
+                    </div>
+                    <div class="contact-item">
+                        <a href="tel:+918260586748">+91 82605 86748</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
+
+
