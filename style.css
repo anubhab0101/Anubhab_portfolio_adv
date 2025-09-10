@@ -158,6 +158,31 @@ body.dark-mode #about_me { background-color: #111111; color: #f0f0f0; }
 #about_me h2 { font-size: 1.8em; }
 #about_me p { text-align: justify; font-size: 1.1em; line-height: 1.6; }
 
+/* --- CERTIFICATES CAROUSEL --- */
+#Certificates { background-color: #ffffff; color: var(--text-light); z-index: 4; }
+body.dark-mode #Certificates { background-color: #111111; color: #f0f0f0; }
+#Certificates .content-panel { background-color: transparent; border: none; backdrop-filter: none; }
+#Certificates h2 { font-size: 1.8em; margin-bottom: 16px; text-align: center; }
+.carousel-container { position: relative; width: 100%; max-width: 1480px; margin: 0 auto; }
+.carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.5); color: #fff; border: none; width: 44px; height: 44px; border-radius: 22px; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 2; }
+.carousel-btn.prev { left: 8px; }
+.carousel-btn.next { right: 8px; }
+.carousel-btn svg { width: 20px; height: 20px; }
+.carousel-btn.disabled { opacity: 0.35; pointer-events: none; }
+.carousel-viewport { overflow: hidden; width: 100%; }
+.carousel-track { display: flex; gap: 24px; align-items: stretch; transition: transform 0.4s ease; will-change: transform; padding: 8px; }
+.certificate-card { background-color: var(--card-light); border: 1px solid #616161; border-radius: 16px; overflow: hidden; flex: 0 0 auto; width: min(900px, 90vw); display: flex; flex-direction: column; justify-content: flex-start; }
+body.dark-mode .certificate-card { background-color: var(--panel-dark); border: 1px solid var(--border-dark); }
+.certificate-card img { width: 100%; height: auto; display: block; }
+.certificate-info { padding: 16px; display: flex; flex-direction: column; gap: 8px; }
+.certificate-info h3 { margin: 0; font-size: 1.1em; text-align: center; }
+.certificate-info p { margin: 0; font-size: 0.95em; text-align: center; color: #333; }
+body.dark-mode .certificate-info p { color: #ccc; }
+.verify-btn { align-self: center; margin-top: 8px; text-decoration: none; background: #1b616a; color: #fff; padding: 10px 16px; border-radius: 8px; font-weight: 600; transition: background-color 0.2s ease; }
+.verify-btn:hover { background: #134149; }
+body.dark-mode .verify-btn { background: #38bdf8; color: #000; }
+body.dark-mode .verify-btn:hover { background: #1ea0db; color: #000; }
+
 /* --- HORIZONTAL SCROLL --- */
 .horizontal-scroll-container { height: 400vh; position: relative; background-color: #ffffff; z-index: 5; }
 body.dark-mode .horizontal-scroll-container { background-color: var(--bg-dark); }
@@ -321,6 +346,11 @@ body.dark-mode .contact-item a:hover { color: #38bdf8; }
         scroll-snap-type: x mandatory;
         -webkit-overflow-scrolling: touch;
     }
+    /* Certificates: enable swipe with snap on mobile */
+    #Certificates .carousel-viewport { overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
+    #Certificates .carousel-track { gap: 16px; padding: 16px; }
+    #Certificates .certificate-card { scroll-snap-align: center; width: 88vw; }
+    #Certificates .carousel-btn { display: none; }
     .scroll-btn { display: flex; }
     .project-card {
         flex: 0 0 100%;

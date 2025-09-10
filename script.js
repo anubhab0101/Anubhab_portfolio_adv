@@ -236,4 +236,44 @@ document.addEventListener('DOMContentLoaded', () => {
         scrollContent && scrollContent.addEventListener('scroll', updateScrollButtons, { passive: true });
         updateScrollButtons();
     }
+
+    // --- CERTIFICATES CAROUSEL LOGIC ---
+    const carousel = document.querySelector('#Certificates .carousel-container');
+    const track = document.querySelector('#Certificates .carousel-track');
+    const viewport = document.querySelector('#Certificates .carousel-viewport');
+    const prevBtn = document.querySelector('#Certificates .carousel-btn.prev');
+    const nextBtn = document.querySelector('#Certificates .carousel-btn.next');
+
+    function getCardWidth() {
+        const card = track ? track.querySelector('.certificate-card') : null;
+        if (!card) return 0;
+        const style = getComputedStyle(track);
+        const gap = parseInt(style.gap || '24', 10);
+        return card.getBoundingClientRect().width + gap;
+    }
+
+    let currentIndex = 0;
+
+    function updateCarouselButtons() {
+        if (!track || !prevBtn || !nextBtn) return;
+        const totalCards = track.querySelectorAll('.certificate-card').length;
+        prevBtn.classList.toggle('disabled', currentIndex <= 0);
+        nextBtn.classList.toggle('disabled', currentIndex >= totalCards - 1);
+    }
+
+    function moveToIndex(index) {
+        if (!track) return;
+        const totalCards = track.querySelectorAll('.certificate-card').length;
+        currentIndex = Math.max(0, Math.min(index, totalCards - 1));
+        const offset = -currentIndex * getCardWidth();
+        track.style.transform = `translateX(${offset}px)`;
+        updateCarouselButtons();
+    }
+
+    if (carousel && track && viewport && prevBtn && nextBtn) {
+        prevBtn.addEventListener('click', () => moveToIndex(currentIndex - 1));
+        nextBtn.addEventListener('click', () => moveToIndex(currentIndex + 1));
+        window.addEventListener('resize', () => moveToIndex(currentIndex), { passive: true });
+        moveToIndex(0);
+    }
 });
