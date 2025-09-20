@@ -39,11 +39,7 @@
         </style>
     </noscript>
 
-    <amp-state id="ui">
-        <script type="application/json">
-        { "dark": false }
-        </script>
-    </amp-state>
+
 
     <!-- Structured Data (JSON-LD) -->
     <script type="application/ld+json">
@@ -356,6 +352,11 @@ body.dark-mode .contact-item a:hover { color: #38bdf8; }
     </style>
 </head>
 <body [class]="ui.dark ? 'dark-mode' : ''">
+    <amp-state id="ui">
+        <script type="application/json">
+        { "dark": false }
+        </script>
+    </amp-state>
     <!-- Removed Spline viewer and all custom JS for AMP compliance -->
     <div id="navigationbar">
         <span class="nav-name"><a href="https://anubhabmohapatra.in" class="nav-brand-link">Anubhab</a></span>
