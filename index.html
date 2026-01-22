@@ -261,9 +261,7 @@
         
     </main>
 
-    <!-- Load Spline viewer only when needed -->
     <script>
-        // Load Spline viewer only in dark mode to improve initial page load
         function loadSplineViewer() {
             if (document.body.classList.contains('dark-mode')) {
                 const script = document.createElement('script');
@@ -273,7 +271,6 @@
             }
         }
         
-        // Load on theme change
         document.addEventListener('DOMContentLoaded', () => {
             const observer = new MutationObserver((mutations) => {
                 mutations.forEach((mutation) => {
@@ -289,18 +286,14 @@
     
     <!-- Performance Monitoring -->
     <script>
-        // Performance monitoring
         window.addEventListener('load', () => {
-            // Core Web Vitals monitoring
             if ('PerformanceObserver' in window) {
-                // Largest Contentful Paint (LCP)
                 new PerformanceObserver((entryList) => {
                     const entries = entryList.getEntries();
                     const lastEntry = entries[entries.length - 1];
                     console.log('LCP:', lastEntry.startTime);
                 }).observe({ entryTypes: ['largest-contentful-paint'] });
 
-                // First Input Delay (FID)
                 new PerformanceObserver((entryList) => {
                     const entries = entryList.getEntries();
                     entries.forEach(entry => {
@@ -308,7 +301,6 @@
                     });
                 }).observe({ entryTypes: ['first-input'] });
 
-                // Cumulative Layout Shift (CLS)
                 let clsValue = 0;
                 new PerformanceObserver((entryList) => {
                     for (const entry of entryList.getEntries()) {
@@ -320,7 +312,6 @@
                 }).observe({ entryTypes: ['layout-shift'] });
             }
 
-            // Basic performance metrics
             const perfData = performance.getEntriesByType('navigation')[0];
             if (perfData) {
                 console.log('Page Load Time:', perfData.loadEventEnd - perfData.loadEventStart);
