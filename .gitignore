@@ -13,3 +13,5 @@ pnpm-debug.log*
 .next-dev*.log
 next-env.d.ts
 tsconfig.tsbuildinfo
+
+.vercel
