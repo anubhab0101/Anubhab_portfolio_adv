@@ -305,24 +305,19 @@ body.dark-mode .contact-item a:hover { color: #38bdf8; }
     #header { position: relative; transform: none; top: 200px; left: auto; padding: 80px 20px 40px 20px; text-align: center; width: 100%; z-index: 1; }
     #header h1 { font-size: 1.8em; text-align: center; }
     .full-page-section { height: auto; min-height: 100vh; }
-    .horizontal-scroll-container { height: auto; }
-    .sticky-wrapper { position: static; height: auto; }
-    /* Enable horizontal scroll on mobile */
+    .horizontal-scroll-container { height: 400vh; }
+    .sticky-wrapper { position: sticky; height: 100vh; }
+    /* Match desktop scroll-driven horizontal movement on mobile */
     .scroll-content {
         display: flex;
         flex-direction: row;
-        align-items: stretch;
-        width: 100%;
-        height: auto;
-        padding: 40px 16px;
+        align-items: center;
+        width: max-content;
+        height: 100%;
+        padding: 0 16px;
         gap: 16px;
-        overflow-x: auto;
-        overflow-y: hidden;
-        scroll-behavior: smooth;
-        -webkit-overflow-scrolling: touch;
-        overscroll-behavior-x: contain;
     }
-    .scroll-btn { display: flex; }
+    .scroll-btn { display: none; }
     .project-card {
         flex: 0 0 100%;
         width: 100%;

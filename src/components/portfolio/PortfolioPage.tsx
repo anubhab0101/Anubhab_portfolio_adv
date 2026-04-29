@@ -290,10 +290,9 @@ export function PortfolioPage({ data }: Props) {
 
     const horizontalContainer = document.querySelector<HTMLElement>(".horizontal-scroll-container");
     const scrollContent = document.querySelector<HTMLElement>(".scroll-content");
-    const isMobile = () => window.matchMedia("(max-width: 768px)").matches;
 
     const handleHorizontalScroll = () => {
-      if (!horizontalContainer || !scrollContent || isMobile()) {
+      if (!horizontalContainer || !scrollContent) {
         if (scrollContent) {
           scrollContent.style.transform = "translateX(0px)";
         }

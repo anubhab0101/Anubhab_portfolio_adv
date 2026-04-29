@@ -1199,31 +1199,26 @@ body.dark-mode .contact-item a:hover {
   }
 
   .horizontal-scroll-container {
-    height: auto;
+    height: 400vh;
   }
 
   .sticky-wrapper {
-    position: static;
-    height: auto;
+    position: sticky;
+    height: 100vh;
   }
 
   .scroll-content {
     display: flex;
     flex-direction: row;
     gap: 16px;
-    align-items: stretch;
-    width: 100%;
-    height: auto;
-    padding: 40px 7vw;
-    overflow-x: auto;
-    overflow-y: hidden;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-    overscroll-behavior-x: contain;
+    align-items: center;
+    width: max-content;
+    height: 100%;
+    padding: 0 7vw;
   }
 
   .scroll-btn {
-    display: flex;
+    display: none;
   }
 
   .project-card {

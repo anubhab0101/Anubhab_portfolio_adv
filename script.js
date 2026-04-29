@@ -166,10 +166,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- HORIZONTAL SCROLL LOGIC ---
     const horizontalContainer = document.querySelector('.horizontal-scroll-container');
     const scrollContent = document.querySelector('.scroll-content');
-    const isMobile = () => window.matchMedia('(max-width: 768px)').matches;
 
     function handleHorizontalScroll() {
-        if (!horizontalContainer || !scrollContent || isMobile()) {
+        if (!horizontalContainer || !scrollContent) {
             if (scrollContent) scrollContent.style.transform = 'translateX(0px)';
             return;
         }
