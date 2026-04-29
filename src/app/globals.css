@@ -1217,6 +1217,7 @@ body.dark-mode .contact-item a:hover {
     padding: 40px 7vw;
     overflow-x: auto;
     overflow-y: hidden;
+    scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
     overscroll-behavior-x: contain;
   }
