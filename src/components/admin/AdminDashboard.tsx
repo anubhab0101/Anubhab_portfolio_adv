@@ -173,7 +173,7 @@ function SitePanel({ data }: { data: PortfolioData }) {
 function SocialForm({ item }: { item?: SocialLink }) {
   return (
     <div className="admin-item">
-      <form className="admin-item-form" action={saveSocialAction}>
+      <form className="admin-item-form" action={saveSocialAction} encType="multipart/form-data">
         {item ? <input type="hidden" name="id" value={item.id} /> : null}
         <div className="form-row">
           <Field label="Label" name="label" defaultValue={item?.label} required />
@@ -181,6 +181,7 @@ function SocialForm({ item }: { item?: SocialLink }) {
         </div>
         <Field label="URL" name="url" defaultValue={item?.url} required />
         <Field label="Icon image URL" name="icon_image_url" defaultValue={item?.iconImageUrl} />
+        <FileField label="Upload icon image to Supabase" name="social_icon_file" accept="image/*" />
         <div className="form-row">
           <Field label="Sort order" name="sort_order" type="number" defaultValue={item?.sortOrder ?? 0} />
           <Published defaultChecked={item?.published ?? true} />

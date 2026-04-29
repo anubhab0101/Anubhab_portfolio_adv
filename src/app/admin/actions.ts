@@ -218,11 +218,14 @@ export async function saveSeoAction(formData: FormData) {
 }
 
 export async function saveSocialAction(formData: FormData) {
+  const iconFile = getUploadFile(formData, "social_icon_file");
+  const uploadedIcon = iconFile ? await uploadMediaFile(iconFile, "socials") : null;
+
   await saveRow("social_links", formData, {
     label: requiredText(formData, "label", "Label"),
     platform: requiredText(formData, "platform", "Platform"),
     url: requiredText(formData, "url", "URL"),
-    icon_image_url: text(formData, "icon_image_url"),
+    icon_image_url: uploadedIcon?.url || text(formData, "icon_image_url"),
     sort_order: numberField(formData, "sort_order"),
     published: published(formData)
   });
