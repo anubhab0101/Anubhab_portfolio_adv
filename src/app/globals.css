@@ -640,30 +640,72 @@ body.dark-mode .tech-stack {
   z-index: 7;
 }
 
+.certifications-carousel {
+  position: relative;
+  width: min(100%, 980px);
+  min-height: 430px;
+  margin: 36px auto 0;
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent);
+}
+
 .certifications-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 22px;
-  margin-top: 28px;
+  display: flex;
+  gap: var(--cert-card-gap, 24px);
+  align-items: center;
+  width: max-content;
+  height: 100%;
+  padding: 34px 0;
+  transition: transform 0.45s ease;
+  will-change: transform;
 }
 
 .certification-card {
+  position: relative;
   display: flex;
-  gap: 18px;
-  align-items: flex-start;
+  flex: 0 0 var(--cert-card-width, 336px);
+  flex-direction: column;
+  gap: 16px;
+  width: var(--cert-card-width, 336px);
+  min-height: 360px;
+  padding: 18px;
+  cursor: pointer;
+  opacity: 0.42;
+  transform: scale(0.84);
+  transition: transform 0.35s ease, opacity 0.35s ease, box-shadow 0.35s ease;
 }
 
-.certification-card img {
-  width: 120px;
-  min-width: 120px;
-  height: 90px;
+.certification-card.is-active {
+  z-index: 2;
+  opacity: 1;
+  transform: scale(1);
+  box-shadow: 0 22px 60px rgba(0, 0, 0, 0.18);
+}
+
+.certification-card img,
+.certification-placeholder {
+  width: 100%;
+  height: 190px;
   object-fit: cover;
-  border-radius: 10px;
+  border-radius: 12px;
+}
+
+.certification-placeholder {
+  display: grid;
+  place-items: center;
+  color: #ffffff;
+  background: linear-gradient(135deg, #1b616a, #111111);
+}
+
+.certification-placeholder span {
+  font-size: 2.5rem;
+  font-weight: 900;
 }
 
 .certification-info {
   display: grid;
   gap: 8px;
+  text-align: left;
 }
 
 .certification-info p {
@@ -679,6 +721,35 @@ body.dark-mode .tech-stack {
 
 body.dark-mode .certification-info a {
   color: #38bdf8;
+}
+
+.cert-carousel-btn {
+  position: absolute;
+  top: 50%;
+  z-index: 4;
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  color: #ffffff;
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0.64);
+  border: 0;
+  border-radius: 50%;
+  transform: translateY(-50%);
+}
+
+.cert-carousel-btn.left {
+  left: 12px;
+}
+
+.cert-carousel-btn.right {
+  right: 12px;
+}
+
+.cert-carousel-btn svg {
+  width: 20px;
+  height: 20px;
 }
 
 .empty-state {
@@ -959,6 +1030,13 @@ body.dark-mode .contact-item a:hover {
   font-weight: 700;
 }
 
+.field-help {
+  margin: 0;
+  color: #6a6a6a;
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
 .field input,
 .field textarea,
 .field select {
@@ -1136,10 +1214,10 @@ body.dark-mode .contact-item a:hover {
     align-items: stretch;
     width: 100%;
     height: auto;
-    padding: 40px 16px;
+    padding: 40px 7vw;
     overflow-x: auto;
     overflow-y: hidden;
-    scroll-snap-type: x mandatory;
+    scroll-snap-type: x proximity;
   }
 
   .scroll-btn {
@@ -1147,25 +1225,47 @@ body.dark-mode .contact-item a:hover {
   }
 
   .project-card {
-    flex: 0 0 100%;
-    width: 100%;
+    flex: 0 0 86vw;
+    width: 86vw;
     max-width: none;
     height: auto;
     min-height: 500px;
-    scroll-snap-align: start;
+    scroll-snap-align: center;
   }
 
   .social-icon:nth-child(even) {
     margin-top: 0;
   }
 
-  .certification-card {
-    flex-direction: column;
+  .certifications-carousel {
+    width: 100%;
+    min-height: 410px;
+    margin-top: 26px;
+    mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
   }
 
-  .certification-card img {
+  .certifications-container {
+    padding: 28px 0;
+  }
+
+  .certification-card {
+    min-height: 340px;
+    padding: 16px;
+    scroll-snap-align: center;
+  }
+
+  .certification-card img,
+  .certification-placeholder {
     width: 100%;
-    height: 180px;
+    height: 170px;
+  }
+
+  .cert-carousel-btn.left {
+    left: 4px;
+  }
+
+  .cert-carousel-btn.right {
+    right: 4px;
   }
 
   .admin-grid,

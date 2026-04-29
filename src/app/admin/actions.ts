@@ -13,6 +13,10 @@ type UploadState = {
   url: string;
   ok: boolean;
 };
+type UploadedMedia = {
+  url: string;
+  contentType: string;
+};
 
 const portfolioBucket = "portfolio-media";
 
@@ -61,6 +65,58 @@ function safeFilename(filename: string) {
   const base = filename.replace(/\.[^.]+$/, "");
   const safeBase = base.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
   return `${safeBase || "asset"}${fileExtension(filename)}`;
+}
+
+function getUploadFile(formData: FormData, key: string) {
+  const file = formData.get(key);
+  return file instanceof File && file.size > 0 ? file : null;
+}
+
+function assertAllowedMedia(file: File) {
+  const allowedTypes = new Set(["image/jpeg", "image/png", "image/webp", "image/gif", "application/pdf"]);
+  if (!allowedTypes.has(file.type)) {
+    throw new Error("Only JPG, PNG, WebP, GIF, or PDF files are allowed.");
+  }
+
+  if (file.size > 8 * 1024 * 1024) {
+    throw new Error("File must be 8 MB or smaller.");
+  }
+}
+
+async function uploadMediaFile(file: File, folder: string): Promise<UploadedMedia> {
+  const user = await requireAdmin();
+  assertAllowedMedia(file);
+
+  const safeFolder = folder.toLowerCase().replace(/[^a-z0-9-]/g, "-");
+  const path = `${safeFolder}/${Date.now()}-${safeFilename(file.name)}`;
+  const supabase = createSupabaseServiceClient();
+  const uploadResult = await supabase.storage.from(portfolioBucket).upload(path, file, {
+    contentType: file.type,
+    upsert: false
+  });
+
+  assertMutation(uploadResult.error);
+
+  const {
+    data: { publicUrl }
+  } = supabase.storage.from(portfolioBucket).getPublicUrl(path);
+
+  const mediaResult = await supabase.from("media_assets").insert({
+    bucket: portfolioBucket,
+    path,
+    url: publicUrl,
+    filename: file.name,
+    content_type: file.type,
+    size_bytes: file.size,
+    created_by: user.id
+  });
+
+  assertMutation(mediaResult.error);
+
+  return {
+    url: publicUrl,
+    contentType: file.type
+  };
 }
 
 async function refreshPortfolio() {
@@ -206,13 +262,16 @@ export async function deleteSkillAction(formData: FormData) {
 }
 
 export async function saveProjectAction(formData: FormData) {
+  const imageFile = getUploadFile(formData, "project_image_file");
+  const uploadedImage = imageFile ? await uploadMediaFile(imageFile, "projects") : null;
+
   await saveRow("projects", formData, {
     title: requiredText(formData, "title", "Project title"),
     description: requiredText(formData, "description", "Project description"),
     tech_stack: listField(formData, "tech_stack"),
     live_url: text(formData, "live_url"),
     repo_url: text(formData, "repo_url"),
-    image_url: text(formData, "image_url"),
+    image_url: uploadedImage?.url || text(formData, "image_url"),
     image_alt: text(formData, "image_alt"),
     sort_order: numberField(formData, "sort_order"),
     published: published(formData)
@@ -224,13 +283,16 @@ export async function deleteProjectAction(formData: FormData) {
 }
 
 export async function saveCertificationAction(formData: FormData) {
+  const certificateFile = getUploadFile(formData, "certificate_file");
+  const uploadedCertificate = certificateFile ? await uploadMediaFile(certificateFile, "certifications") : null;
+
   await saveRow("certifications", formData, {
     title: requiredText(formData, "title", "Certification title"),
     issuer: requiredText(formData, "issuer", "Issuer"),
     issue_date: text(formData, "issue_date") || null,
     credential_url: text(formData, "credential_url"),
-    file_url: text(formData, "file_url"),
-    file_type: text(formData, "file_type"),
+    file_url: uploadedCertificate?.url || text(formData, "file_url"),
+    file_type: uploadedCertificate?.contentType || text(formData, "file_type"),
     skills: listField(formData, "skills"),
     sort_order: numberField(formData, "sort_order"),
     published: published(formData)
@@ -258,49 +320,17 @@ export async function deleteTestimonialAction(formData: FormData) {
 
 export async function uploadMediaAction(_previousState: UploadState, formData: FormData): Promise<UploadState> {
   try {
-    const user = await requireAdmin();
-    const file = formData.get("file");
+    const file = getUploadFile(formData, "file");
 
-    if (!(file instanceof File) || file.size === 0) {
+    if (!file) {
       return { message: "Choose an image or PDF to upload.", url: "", ok: false };
     }
 
-    const allowedTypes = new Set(["image/jpeg", "image/png", "image/webp", "image/gif", "application/pdf"]);
-    if (!allowedTypes.has(file.type)) {
-      return { message: "Only JPG, PNG, WebP, GIF, or PDF files are allowed.", url: "", ok: false };
-    }
-
-    if (file.size > 8 * 1024 * 1024) {
-      return { message: "File must be 8 MB or smaller.", url: "", ok: false };
-    }
-
     const folder = text(formData, "folder") || "uploads";
-    const safeFolder = folder.toLowerCase().replace(/[^a-z0-9-]/g, "-");
-    const path = `${safeFolder}/${Date.now()}-${safeFilename(file.name)}`;
-    const supabase = createSupabaseServiceClient();
-    const uploadResult = await supabase.storage.from(portfolioBucket).upload(path, file, {
-      contentType: file.type,
-      upsert: false
-    });
-
-    assertMutation(uploadResult.error);
-
-    const {
-      data: { publicUrl }
-    } = supabase.storage.from(portfolioBucket).getPublicUrl(path);
-
-    await supabase.from("media_assets").insert({
-      bucket: portfolioBucket,
-      path,
-      url: publicUrl,
-      filename: file.name,
-      content_type: file.type,
-      size_bytes: file.size,
-      created_by: user.id
-    });
+    const uploaded = await uploadMediaFile(file, folder);
 
     await refreshPortfolio();
-    return { message: "Upload complete. Use this URL in any image/file field.", url: publicUrl, ok: true };
+    return { message: "Upload complete. Use this URL in any image/file field.", url: uploaded.url, ok: true };
   } catch (error) {
     const message = error instanceof Error ? error.message : "Upload failed.";
     return { message, url: "", ok: false };

@@ -81,6 +81,24 @@ function TextArea({
   );
 }
 
+function FileField({
+  label,
+  name,
+  accept
+}: {
+  label: string;
+  name: string;
+  accept: string;
+}) {
+  return (
+    <div className="field">
+      <label htmlFor={name}>{label}</label>
+      <input id={name} name={name} type="file" accept={accept} />
+      <p className="field-help">Optional. Choosing a file uploads it to Supabase and replaces the URL on save.</p>
+    </div>
+  );
+}
+
 function Published({ defaultChecked = true }: { defaultChecked?: boolean }) {
   return (
     <label className="check-field">
@@ -222,7 +240,7 @@ function SkillForm({ item }: { item?: Skill }) {
 function ProjectForm({ item }: { item?: Project }) {
   return (
     <div className="admin-item">
-      <form className="admin-item-form" action={saveProjectAction}>
+      <form className="admin-item-form" action={saveProjectAction} encType="multipart/form-data">
         {item ? <input type="hidden" name="id" value={item.id} /> : null}
         <Field label="Title" name="title" defaultValue={item?.title} required />
         <TextArea label="Description" name="description" defaultValue={item?.description} required />
@@ -232,6 +250,7 @@ function ProjectForm({ item }: { item?: Project }) {
           <Field label="Repository URL" name="repo_url" defaultValue={item?.repoUrl} />
         </div>
         <Field label="Image URL" name="image_url" defaultValue={item?.imageUrl} />
+        <FileField label="Upload project image to Supabase" name="project_image_file" accept="image/*" />
         <Field label="Image alt text" name="image_alt" defaultValue={item?.imageAlt} />
         <div className="form-row">
           <Field label="Sort order" name="sort_order" type="number" defaultValue={item?.sortOrder ?? 0} />
@@ -247,7 +266,7 @@ function ProjectForm({ item }: { item?: Project }) {
 function CertificationForm({ item }: { item?: Certification }) {
   return (
     <div className="admin-item">
-      <form className="admin-item-form" action={saveCertificationAction}>
+      <form className="admin-item-form" action={saveCertificationAction} encType="multipart/form-data">
         {item ? <input type="hidden" name="id" value={item.id} /> : null}
         <div className="form-row">
           <Field label="Title" name="title" defaultValue={item?.title} required />
@@ -258,6 +277,7 @@ function CertificationForm({ item }: { item?: Certification }) {
           <Field label="Credential URL" name="credential_url" defaultValue={item?.credentialUrl} />
         </div>
         <Field label="Certificate image/PDF URL" name="file_url" defaultValue={item?.fileUrl} />
+        <FileField label="Upload certificate image/PDF to Supabase" name="certificate_file" accept="image/*,application/pdf" />
         <Field label="File type" name="file_type" defaultValue={item?.fileType} />
         <Field label="Skills, comma separated" name="skills" defaultValue={item?.skills.join(", ")} />
         <div className="form-row">

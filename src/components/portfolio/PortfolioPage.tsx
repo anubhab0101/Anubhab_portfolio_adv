@@ -1,6 +1,6 @@
 "use client";
 
-import { createElement, useEffect, useMemo, useState } from "react";
+import { createElement, useEffect, useMemo, useState, type CSSProperties } from "react";
 import type { PortfolioData } from "@/lib/types";
 
 type Props = {
@@ -21,6 +21,20 @@ const navItems = [
 
 function primaryProjectUrl(liveUrl: string, repoUrl: string) {
   return liveUrl || repoUrl || "#";
+}
+
+function isCertificateImage(fileUrl: string, fileType: string) {
+  const normalizedType = fileType.toLowerCase();
+  const normalizedUrl = fileUrl.toLowerCase();
+
+  return (
+    normalizedType.startsWith("image/") ||
+    normalizedUrl.endsWith(".jpg") ||
+    normalizedUrl.endsWith(".jpeg") ||
+    normalizedUrl.endsWith(".png") ||
+    normalizedUrl.endsWith(".webp") ||
+    normalizedUrl.endsWith(".gif")
+  );
 }
 
 function renderHeroHeadline(headline: string) {
@@ -44,6 +58,8 @@ export function PortfolioPage({ data }: Props) {
   const [darkMode, setDarkMode] = useState(() => {
     return typeof window !== "undefined" && window.localStorage.getItem("theme") === "dark";
   });
+  const [activeCertification, setActiveCertification] = useState(0);
+  const [certLayout, setCertLayout] = useState({ width: 336, gap: 24 });
 
   const skillsByCategory = useMemo(() => {
     return data.skills.reduce<Record<string, string[]>>((groups, skill) => {
@@ -51,6 +67,44 @@ export function PortfolioPage({ data }: Props) {
       return groups;
     }, {});
   }, [data.skills]);
+
+  const visibleCertification = Math.min(activeCertification, Math.max(data.certifications.length - 1, 0));
+
+  useEffect(() => {
+    const updateCertLayout = () => {
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        setCertLayout({
+          width: Math.min(320, Math.max(280, window.innerWidth * 0.82)),
+          gap: 16
+        });
+        return;
+      }
+
+      setCertLayout({ width: 336, gap: 24 });
+    };
+
+    updateCertLayout();
+    window.addEventListener("resize", updateCertLayout);
+
+    return () => window.removeEventListener("resize", updateCertLayout);
+  }, []);
+
+  const moveCertification = (direction: number) => {
+    if (data.certifications.length === 0) {
+      return;
+    }
+
+    setActiveCertification((index) => {
+      const nextIndex = index + direction;
+      if (nextIndex < 0) {
+        return data.certifications.length - 1;
+      }
+      if (nextIndex >= data.certifications.length) {
+        return 0;
+      }
+      return nextIndex;
+    });
+  };
 
   useEffect(() => {
     document.body.classList.toggle("dark-mode", darkMode);
@@ -509,12 +563,43 @@ export function PortfolioPage({ data }: Props) {
           <div className="content-panel">
             <h2 className="animate-on-scroll">Certifications:</h2>
             {data.certifications.length > 0 ? (
-              <div className="certifications-container">
+              <div className="certifications-carousel animate-on-scroll">
+                <button
+                  className="cert-carousel-btn left"
+                  type="button"
+                  aria-label="Previous certification"
+                  onClick={() => moveCertification(-1)}
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M15.75 19.5a.75.75 0 0 1-.53-.22l-7.5-7.5a.75.75 0 0 1 0-1.06l7.5-7.5a.75.75 0 1 1 1.06 1.06L9.06 12l7.22 7.22a.75.75 0 0 1-.53 1.28Z" />
+                  </svg>
+                </button>
+                <div
+                  className="certifications-container"
+                  style={
+                    {
+                      "--cert-card-width": `${certLayout.width}px`,
+                      "--cert-card-gap": `${certLayout.gap}px`,
+                      transform: `translateX(calc(50% - ${
+                        (visibleCertification + 0.5) * (certLayout.width + certLayout.gap)
+                      }px))`
+                    } as CSSProperties
+                  }
+                >
                 {data.certifications.map((cert, index) => (
-                  <article className="certification-card animate-on-scroll" data-delay={index * 150} key={cert.id}>
-                    {cert.fileUrl && cert.fileType !== "application/pdf" ? (
+                  <article
+                    className={`certification-card ${index === visibleCertification ? "is-active" : ""}`}
+                    data-delay={index * 150}
+                    key={cert.id}
+                    onClick={() => setActiveCertification(index)}
+                  >
+                    {cert.fileUrl && isCertificateImage(cert.fileUrl, cert.fileType) ? (
                       <img src={cert.fileUrl} alt={`${cert.title} certificate`} />
-                    ) : null}
+                    ) : (
+                      <div className="certification-placeholder">
+                        <span>{cert.title.slice(0, 2).toUpperCase()}</span>
+                      </div>
+                    )}
                     <div className="certification-info">
                       <h3>{cert.title}</h3>
                       <p>
@@ -530,6 +615,17 @@ export function PortfolioPage({ data }: Props) {
                     </div>
                   </article>
                 ))}
+                </div>
+                <button
+                  className="cert-carousel-btn right"
+                  type="button"
+                  aria-label="Next certification"
+                  onClick={() => moveCertification(1)}
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M8.25 4.5a.75.75 0 0 1 .53.22l7.5 7.5a.75.75 0 0 1 0 1.06l-7.5 7.5a.75.75 0 1 1-1.06-1.06L14.94 12 7.72 4.78a.75.75 0 0 1 .53-1.28Z" />
+                  </svg>
+                </button>
               </div>
             ) : (
               <p className="empty-state animate-on-scroll">Published certifications will appear here after you add them in admin.</p>
