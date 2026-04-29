@@ -1,4 +1,5 @@
 import { seedPortfolioData } from "@/lib/seed-data";
+import { hasServiceSupabaseEnv } from "@/lib/env";
 import { createSupabaseServiceClient } from "@/lib/supabase/admin";
 import { createPublicSupabaseClient } from "@/lib/supabase/public";
 import type {
@@ -235,7 +236,9 @@ async function readPortfolioData(
 }
 
 export async function getPortfolioData(options: { includeDrafts?: boolean } = {}): Promise<PortfolioData> {
-  const supabase = createPublicSupabaseClient();
+  const supabase = hasServiceSupabaseEnv()
+    ? createSupabaseServiceClient()
+    : createPublicSupabaseClient();
 
   if (!supabase) {
     return seedPortfolioData;
