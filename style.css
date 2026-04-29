@@ -307,7 +307,7 @@ body.dark-mode .contact-item a:hover { color: #38bdf8; }
     .full-page-section { height: auto; min-height: 100vh; }
     .horizontal-scroll-container { height: auto; }
     .sticky-wrapper { position: static; height: auto; }
-    /* Enable horizontal scroll with snap on mobile */
+    /* Enable horizontal scroll on mobile */
     .scroll-content {
         display: flex;
         flex-direction: row;
@@ -318,8 +318,8 @@ body.dark-mode .contact-item a:hover { color: #38bdf8; }
         gap: 16px;
         overflow-x: auto;
         overflow-y: hidden;
-        scroll-snap-type: x mandatory;
         -webkit-overflow-scrolling: touch;
+        overscroll-behavior-x: contain;
     }
     .scroll-btn { display: flex; }
     .project-card {
@@ -328,7 +328,6 @@ body.dark-mode .contact-item a:hover { color: #38bdf8; }
         max-width: none;
         height: auto;
         min-height: 500px;
-        scroll-snap-align: start;
     }
     .social-icon:nth-child(even) { margin-top: 0; }
 }

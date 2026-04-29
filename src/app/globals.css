@@ -1217,7 +1217,8 @@ body.dark-mode .contact-item a:hover {
     padding: 40px 7vw;
     overflow-x: auto;
     overflow-y: hidden;
-    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
   }
 
   .scroll-btn {
@@ -1230,7 +1231,6 @@ body.dark-mode .contact-item a:hover {
     max-width: none;
     height: auto;
     min-height: 500px;
-    scroll-snap-align: center;
   }
 
   .social-icon:nth-child(even) {
