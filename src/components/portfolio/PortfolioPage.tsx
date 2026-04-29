@@ -1,11 +1,14 @@
 "use client";
 
-import { createElement, useEffect, useMemo, useState, type CSSProperties } from "react";
+import { createElement, useEffect, useMemo, useState, useSyncExternalStore, type CSSProperties } from "react";
 import type { PortfolioData } from "@/lib/types";
 
 type Props = {
   data: PortfolioData;
 };
+
+type Theme = "light" | "dark";
+const themeChangeEvent = "portfolio-theme-change";
 
 const navItems = [
   ["HOME", "home"],
@@ -21,6 +24,29 @@ const navItems = [
 
 function primaryProjectUrl(liveUrl: string, repoUrl: string) {
   return liveUrl || repoUrl || "#";
+}
+
+function getThemeSnapshot(): Theme {
+  return window.localStorage.getItem("theme") === "dark" ? "dark" : "light";
+}
+
+function getServerThemeSnapshot(): Theme {
+  return "light";
+}
+
+function subscribeToThemeChanges(onStoreChange: () => void) {
+  window.addEventListener("storage", onStoreChange);
+  window.addEventListener(themeChangeEvent, onStoreChange);
+
+  return () => {
+    window.removeEventListener("storage", onStoreChange);
+    window.removeEventListener(themeChangeEvent, onStoreChange);
+  };
+}
+
+function setStoredTheme(theme: Theme) {
+  window.localStorage.setItem("theme", theme);
+  window.dispatchEvent(new Event(themeChangeEvent));
 }
 
 function isCertificateImage(fileUrl: string, fileType: string) {
@@ -55,11 +81,10 @@ function renderHeroHeadline(headline: string) {
 }
 
 export function PortfolioPage({ data }: Props) {
-  const [darkMode, setDarkMode] = useState(() => {
-    return typeof window !== "undefined" && window.localStorage.getItem("theme") === "dark";
-  });
+  const theme = useSyncExternalStore(subscribeToThemeChanges, getThemeSnapshot, getServerThemeSnapshot);
   const [activeCertification, setActiveCertification] = useState(0);
   const [certLayout, setCertLayout] = useState({ width: 336, gap: 24 });
+  const darkMode = theme === "dark";
 
   const skillsByCategory = useMemo(() => {
     return data.skills.reduce<Record<string, string[]>>((groups, skill) => {
@@ -108,7 +133,6 @@ export function PortfolioPage({ data }: Props) {
 
   useEffect(() => {
     document.body.classList.toggle("dark-mode", darkMode);
-    window.localStorage.setItem("theme", darkMode ? "dark" : "light");
 
     if (darkMode && !document.querySelector('script[data-spline-viewer="true"]')) {
       const script = document.createElement("script");
@@ -409,8 +433,8 @@ export function PortfolioPage({ data }: Props) {
             className="animate-on-load"
             data-cursor-text="Theme"
             type="button"
-            onClick={() => setDarkMode((value) => !value)}
-            aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
+            onClick={() => setStoredTheme(darkMode ? "light" : "dark")}
+            aria-label="Toggle color theme"
           >
             <svg className="sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
               <path d="M12 2.25a.75.75 0 0 1 .75.75v2.25a.75.75 0 0 1-1.5 0V3a.75.75 0 0 1 .75-.75ZM7.5 12a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM18.894 6.106a.75.75 0 0 1 0 1.06l-1.591 1.592a.75.75 0 0 1-1.06-1.061l1.591-1.591a.75.75 0 0 1 1.06 0ZM21.75 12a.75.75 0 0 1-.75.75h-2.25a.75.75 0 0 1 0-1.5h2.25a.75.75 0 0 1 .75.75ZM17.803 17.803a.75.75 0 0 1-1.06 0l-1.591-1.591a.75.75 0 1 1 1.06-1.06l1.591 1.591a.75.75 0 0 1 0 1.06ZM12 21a.75.75 0 0 1-.75-.75v-2.25a.75.75 0 0 1 1.5 0v2.25a.75.75 0 0 1-.75.75ZM5.106 18.894a.75.75 0 0 1 0-1.06l1.591-1.592a.75.75 0 0 1 1.06 1.061l-1.591 1.591a.75.75 0 0 1-1.06 0ZM4.5 12a.75.75 0 0 1 .75-.75h2.25a.75.75 0 0 1 0 1.5H5.25a.75.75 0 0 1-.75-.75ZM6.106 5.106a.75.75 0 0 1 1.06 0l1.591 1.591a.75.75 0 1 1-1.06 1.06l-1.591-1.591a.75.75 0 0 1 0-1.06Z" />
