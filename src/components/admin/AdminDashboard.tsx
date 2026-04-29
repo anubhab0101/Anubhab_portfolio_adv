@@ -154,130 +154,142 @@ function SitePanel({ data }: { data: PortfolioData }) {
 
 function SocialForm({ item }: { item?: SocialLink }) {
   return (
-    <form className="admin-item" action={saveSocialAction}>
-      {item ? <input type="hidden" name="id" value={item.id} /> : null}
-      <div className="form-row">
-        <Field label="Label" name="label" defaultValue={item?.label} required />
-        <Field label="Platform" name="platform" defaultValue={item?.platform} required />
-      </div>
-      <Field label="URL" name="url" defaultValue={item?.url} required />
-      <Field label="Icon image URL" name="icon_image_url" defaultValue={item?.iconImageUrl} />
-      <div className="form-row">
-        <Field label="Sort order" name="sort_order" type="number" defaultValue={item?.sortOrder ?? 0} />
-        <Published defaultChecked={item?.published ?? true} />
-      </div>
-      <SaveButton label={item ? "Update social" : "Add social"} />
+    <div className="admin-item">
+      <form className="admin-item-form" action={saveSocialAction}>
+        {item ? <input type="hidden" name="id" value={item.id} /> : null}
+        <div className="form-row">
+          <Field label="Label" name="label" defaultValue={item?.label} required />
+          <Field label="Platform" name="platform" defaultValue={item?.platform} required />
+        </div>
+        <Field label="URL" name="url" defaultValue={item?.url} required />
+        <Field label="Icon image URL" name="icon_image_url" defaultValue={item?.iconImageUrl} />
+        <div className="form-row">
+          <Field label="Sort order" name="sort_order" type="number" defaultValue={item?.sortOrder ?? 0} />
+          <Published defaultChecked={item?.published ?? true} />
+        </div>
+        <SaveButton label={item ? "Update social" : "Add social"} />
+      </form>
       {item ? <DeleteForm id={item.id} action={deleteSocialAction} /> : null}
-    </form>
+    </div>
   );
 }
 
 function EducationForm({ item }: { item?: EducationItem }) {
   return (
-    <form className="admin-item" action={saveEducationAction}>
-      {item ? <input type="hidden" name="id" value={item.id} /> : null}
-      <div className="form-row">
-        <Field label="Degree" name="degree" defaultValue={item?.degree} required />
-        <Field label="Institution" name="institution" defaultValue={item?.institution} required />
-      </div>
-      <div className="form-row">
-        <Field label="Location" name="location" defaultValue={item?.location} />
-        <Field label="Period" name="period" defaultValue={item?.period} required />
-      </div>
-      <TextArea label="Description" name="description" defaultValue={item?.description} />
-      <div className="form-row">
-        <Field label="Sort order" name="sort_order" type="number" defaultValue={item?.sortOrder ?? 0} />
-        <Published defaultChecked={item?.published ?? true} />
-      </div>
-      <SaveButton label={item ? "Update education" : "Add education"} />
+    <div className="admin-item">
+      <form className="admin-item-form" action={saveEducationAction}>
+        {item ? <input type="hidden" name="id" value={item.id} /> : null}
+        <div className="form-row">
+          <Field label="Degree" name="degree" defaultValue={item?.degree} required />
+          <Field label="Institution" name="institution" defaultValue={item?.institution} required />
+        </div>
+        <div className="form-row">
+          <Field label="Location" name="location" defaultValue={item?.location} />
+          <Field label="Period" name="period" defaultValue={item?.period} required />
+        </div>
+        <TextArea label="Description" name="description" defaultValue={item?.description} />
+        <div className="form-row">
+          <Field label="Sort order" name="sort_order" type="number" defaultValue={item?.sortOrder ?? 0} />
+          <Published defaultChecked={item?.published ?? true} />
+        </div>
+        <SaveButton label={item ? "Update education" : "Add education"} />
+      </form>
       {item ? <DeleteForm id={item.id} action={deleteEducationAction} /> : null}
-    </form>
+    </div>
   );
 }
 
 function SkillForm({ item }: { item?: Skill }) {
   return (
-    <form className="admin-item" action={saveSkillAction}>
-      {item ? <input type="hidden" name="id" value={item.id} /> : null}
-      <div className="form-row">
-        <Field label="Name" name="name" defaultValue={item?.name} required />
-        <Field label="Category" name="category" defaultValue={item?.category} required />
-      </div>
-      <div className="form-row">
-        <Field label="Sort order" name="sort_order" type="number" defaultValue={item?.sortOrder ?? 0} />
-        <Published defaultChecked={item?.published ?? true} />
-      </div>
-      <SaveButton label={item ? "Update skill" : "Add skill"} />
+    <div className="admin-item">
+      <form className="admin-item-form" action={saveSkillAction}>
+        {item ? <input type="hidden" name="id" value={item.id} /> : null}
+        <div className="form-row">
+          <Field label="Name" name="name" defaultValue={item?.name} required />
+          <Field label="Category" name="category" defaultValue={item?.category} required />
+        </div>
+        <div className="form-row">
+          <Field label="Sort order" name="sort_order" type="number" defaultValue={item?.sortOrder ?? 0} />
+          <Published defaultChecked={item?.published ?? true} />
+        </div>
+        <SaveButton label={item ? "Update skill" : "Add skill"} />
+      </form>
       {item ? <DeleteForm id={item.id} action={deleteSkillAction} /> : null}
-    </form>
+    </div>
   );
 }
 
 function ProjectForm({ item }: { item?: Project }) {
   return (
-    <form className="admin-item" action={saveProjectAction}>
-      {item ? <input type="hidden" name="id" value={item.id} /> : null}
-      <Field label="Title" name="title" defaultValue={item?.title} required />
-      <TextArea label="Description" name="description" defaultValue={item?.description} required />
-      <Field label="Tech stack, comma separated" name="tech_stack" defaultValue={item?.techStack.join(", ")} />
-      <div className="form-row">
-        <Field label="Live URL" name="live_url" defaultValue={item?.liveUrl} />
-        <Field label="Repository URL" name="repo_url" defaultValue={item?.repoUrl} />
-      </div>
-      <Field label="Image URL" name="image_url" defaultValue={item?.imageUrl} />
-      <Field label="Image alt text" name="image_alt" defaultValue={item?.imageAlt} />
-      <div className="form-row">
-        <Field label="Sort order" name="sort_order" type="number" defaultValue={item?.sortOrder ?? 0} />
-        <Published defaultChecked={item?.published ?? true} />
-      </div>
-      <SaveButton label={item ? "Update project" : "Add project"} />
+    <div className="admin-item">
+      <form className="admin-item-form" action={saveProjectAction}>
+        {item ? <input type="hidden" name="id" value={item.id} /> : null}
+        <Field label="Title" name="title" defaultValue={item?.title} required />
+        <TextArea label="Description" name="description" defaultValue={item?.description} required />
+        <Field label="Tech stack, comma separated" name="tech_stack" defaultValue={item?.techStack.join(", ")} />
+        <div className="form-row">
+          <Field label="Live URL" name="live_url" defaultValue={item?.liveUrl} />
+          <Field label="Repository URL" name="repo_url" defaultValue={item?.repoUrl} />
+        </div>
+        <Field label="Image URL" name="image_url" defaultValue={item?.imageUrl} />
+        <Field label="Image alt text" name="image_alt" defaultValue={item?.imageAlt} />
+        <div className="form-row">
+          <Field label="Sort order" name="sort_order" type="number" defaultValue={item?.sortOrder ?? 0} />
+          <Published defaultChecked={item?.published ?? true} />
+        </div>
+        <SaveButton label={item ? "Update project" : "Add project"} />
+      </form>
       {item ? <DeleteForm id={item.id} action={deleteProjectAction} /> : null}
-    </form>
+    </div>
   );
 }
 
 function CertificationForm({ item }: { item?: Certification }) {
   return (
-    <form className="admin-item" action={saveCertificationAction}>
-      {item ? <input type="hidden" name="id" value={item.id} /> : null}
-      <div className="form-row">
-        <Field label="Title" name="title" defaultValue={item?.title} required />
-        <Field label="Issuer" name="issuer" defaultValue={item?.issuer} required />
-      </div>
-      <div className="form-row">
-        <Field label="Issue date" name="issue_date" type="date" defaultValue={item?.issueDate} />
-        <Field label="Credential URL" name="credential_url" defaultValue={item?.credentialUrl} />
-      </div>
-      <Field label="Certificate image/PDF URL" name="file_url" defaultValue={item?.fileUrl} />
-      <Field label="File type" name="file_type" defaultValue={item?.fileType} />
-      <Field label="Skills, comma separated" name="skills" defaultValue={item?.skills.join(", ")} />
-      <div className="form-row">
-        <Field label="Sort order" name="sort_order" type="number" defaultValue={item?.sortOrder ?? 0} />
-        <Published defaultChecked={item?.published ?? true} />
-      </div>
-      <SaveButton label={item ? "Update certification" : "Add certification"} />
+    <div className="admin-item">
+      <form className="admin-item-form" action={saveCertificationAction}>
+        {item ? <input type="hidden" name="id" value={item.id} /> : null}
+        <div className="form-row">
+          <Field label="Title" name="title" defaultValue={item?.title} required />
+          <Field label="Issuer" name="issuer" defaultValue={item?.issuer} required />
+        </div>
+        <div className="form-row">
+          <Field label="Issue date" name="issue_date" type="date" defaultValue={item?.issueDate} />
+          <Field label="Credential URL" name="credential_url" defaultValue={item?.credentialUrl} />
+        </div>
+        <Field label="Certificate image/PDF URL" name="file_url" defaultValue={item?.fileUrl} />
+        <Field label="File type" name="file_type" defaultValue={item?.fileType} />
+        <Field label="Skills, comma separated" name="skills" defaultValue={item?.skills.join(", ")} />
+        <div className="form-row">
+          <Field label="Sort order" name="sort_order" type="number" defaultValue={item?.sortOrder ?? 0} />
+          <Published defaultChecked={item?.published ?? true} />
+        </div>
+        <SaveButton label={item ? "Update certification" : "Add certification"} />
+      </form>
       {item ? <DeleteForm id={item.id} action={deleteCertificationAction} /> : null}
-    </form>
+    </div>
   );
 }
 
 function TestimonialForm({ item }: { item?: Testimonial }) {
   return (
-    <form className="admin-item" action={saveTestimonialAction}>
-      {item ? <input type="hidden" name="id" value={item.id} /> : null}
-      <TextArea label="Quote" name="quote" defaultValue={item?.quote} required />
-      <div className="form-row">
-        <Field label="Author name" name="author_name" defaultValue={item?.authorName} required />
-        <Field label="Author title" name="author_title" defaultValue={item?.authorTitle} />
-      </div>
-      <div className="form-row">
-        <Field label="Initials" name="initials" defaultValue={item?.initials} />
-        <Field label="Sort order" name="sort_order" type="number" defaultValue={item?.sortOrder ?? 0} />
-      </div>
-      <Published defaultChecked={item?.published ?? true} />
-      <SaveButton label={item ? "Update testimonial" : "Add testimonial"} />
+    <div className="admin-item">
+      <form className="admin-item-form" action={saveTestimonialAction}>
+        {item ? <input type="hidden" name="id" value={item.id} /> : null}
+        <TextArea label="Quote" name="quote" defaultValue={item?.quote} required />
+        <div className="form-row">
+          <Field label="Author name" name="author_name" defaultValue={item?.authorName} required />
+          <Field label="Author title" name="author_title" defaultValue={item?.authorTitle} />
+        </div>
+        <div className="form-row">
+          <Field label="Initials" name="initials" defaultValue={item?.initials} />
+          <Field label="Sort order" name="sort_order" type="number" defaultValue={item?.sortOrder ?? 0} />
+        </div>
+        <Published defaultChecked={item?.published ?? true} />
+        <SaveButton label={item ? "Update testimonial" : "Add testimonial"} />
+      </form>
       {item ? <DeleteForm id={item.id} action={deleteTestimonialAction} /> : null}
-    </form>
+    </div>
   );
 }
 
