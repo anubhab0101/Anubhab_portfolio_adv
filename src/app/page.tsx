@@ -3,7 +3,7 @@ import { PortfolioPage } from "@/components/portfolio/PortfolioPage";
 import { getPortfolioData } from "@/lib/portfolio-data";
 import { absoluteUrl } from "@/lib/url";
 
-export const revalidate = 60;
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata(): Promise<Metadata> {
   const { seo } = await getPortfolioData();
