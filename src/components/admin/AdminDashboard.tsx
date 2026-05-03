@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useState } from "react";
+import { useActionState, useId, useState } from "react";
 import {
   deleteCertificationAction,
   deleteEducationAction,
@@ -40,6 +40,7 @@ const tabs = ["site", "socials", "education", "skills", "projects", "certificati
 type Tab = (typeof tabs)[number];
 
 const emptyUpload = { message: "", url: "", ok: false };
+const maxUploadBytes = 8 * 1024 * 1024;
 
 function Field({
   label,
@@ -90,11 +91,40 @@ function FileField({
   name: string;
   accept: string;
 }) {
+  const inputId = useId();
+  const helpId = `${inputId}-help`;
+  const errorId = `${inputId}-error`;
+  const [error, setError] = useState("");
+
   return (
     <div className="field">
-      <label htmlFor={name}>{label}</label>
-      <input id={name} name={name} type="file" accept={accept} />
-      <p className="field-help">Optional. Choosing a file uploads it to Supabase and replaces the URL on save.</p>
+      <label htmlFor={inputId}>{label}</label>
+      <input
+        id={inputId}
+        name={name}
+        type="file"
+        accept={accept}
+        aria-describedby={error ? `${helpId} ${errorId}` : helpId}
+        onChange={(event) => {
+          const file = event.currentTarget.files?.[0];
+
+          if (file && file.size > maxUploadBytes) {
+            event.currentTarget.value = "";
+            setError("File must be 8 MB or smaller.");
+            return;
+          }
+
+          setError("");
+        }}
+      />
+      <p id={helpId} className="field-help">
+        Optional. Max 8 MB. Choosing a file uploads it to Supabase and replaces the URL on save.
+      </p>
+      {error ? (
+        <p id={errorId} className="field-error" role="alert">
+          {error}
+        </p>
+      ) : null}
     </div>
   );
 }

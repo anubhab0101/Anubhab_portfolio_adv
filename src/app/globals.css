@@ -1037,6 +1037,14 @@ body.dark-mode .contact-item a:hover {
   line-height: 1.4;
 }
 
+.field-error {
+  margin: 0;
+  color: #a40000;
+  font-size: 0.8rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
 .field input,
 .field textarea,
 .field select {
@@ -1088,6 +1096,13 @@ body.dark-mode .contact-item a:hover {
   background: #f0f0f0;
   border-radius: 4px;
   padding: 2px 5px;
+}
+
+.error-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
 }
 
 .upload-result {
