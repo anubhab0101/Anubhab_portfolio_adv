@@ -1045,6 +1045,14 @@ body.dark-mode .contact-item a:hover {
   line-height: 1.4;
 }
 
+.field-success {
+  margin: 0;
+  color: #137333;
+  font-size: 0.8rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
 .field input,
 .field textarea,
 .field select {

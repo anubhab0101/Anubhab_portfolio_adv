@@ -18,8 +18,11 @@ import {
   saveSocialAction,
   saveTestimonialAction,
   signOutAction,
+  prepareMediaUploadAction,
+  recordMediaUploadAction,
   uploadMediaAction
 } from "@/app/admin/actions";
+import { createClient } from "@/lib/supabase/client";
 import type {
   Certification,
   EducationItem,
@@ -85,41 +88,107 @@ function TextArea({
 function FileField({
   label,
   name,
-  accept
+  accept,
+  folder,
+  targetName,
+  fileTypeTargetName
 }: {
   label: string;
   name: string;
   accept: string;
+  folder: string;
+  targetName: string;
+  fileTypeTargetName?: string;
 }) {
   const inputId = useId();
   const helpId = `${inputId}-help`;
   const errorId = `${inputId}-error`;
   const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
+  const [uploading, setUploading] = useState(false);
 
   return (
     <div className="field">
       <label htmlFor={inputId}>{label}</label>
       <input
         id={inputId}
-        name={name}
         type="file"
         accept={accept}
         aria-describedby={error ? `${helpId} ${errorId}` : helpId}
-        onChange={(event) => {
+        disabled={uploading}
+        data-upload-name={name}
+        onChange={async (event) => {
           const file = event.currentTarget.files?.[0];
+          const form = event.currentTarget.form;
 
           if (file && file.size > maxUploadBytes) {
             event.currentTarget.value = "";
             setError("File must be 8 MB or smaller.");
+            setMessage("");
             return;
           }
 
           setError("");
+          setMessage("");
+
+          if (!file) {
+            return;
+          }
+
+          try {
+            setUploading(true);
+            setMessage("Uploading to Supabase...");
+
+            const prepared = await prepareMediaUploadAction({
+              filename: file.name,
+              contentType: file.type,
+              size: file.size,
+              folder
+            });
+
+            const supabase = createClient();
+            const { error: uploadError } = await supabase.storage
+              .from("portfolio-media")
+              .uploadToSignedUrl(prepared.path, prepared.token, file, {
+                contentType: file.type
+              });
+
+            if (uploadError) {
+              throw new Error(uploadError.message);
+            }
+
+            await recordMediaUploadAction({
+              path: prepared.path,
+              url: prepared.publicUrl,
+              filename: file.name,
+              contentType: file.type,
+              size: file.size
+            });
+
+            const target = form?.elements.namedItem(targetName);
+            if (target instanceof HTMLInputElement) {
+              target.value = prepared.publicUrl;
+            }
+
+            const fileTypeTarget = fileTypeTargetName ? form?.elements.namedItem(fileTypeTargetName) : null;
+            if (fileTypeTarget instanceof HTMLInputElement) {
+              fileTypeTarget.value = file.type;
+            }
+
+            setMessage("Upload complete. The URL field has been filled. Now save this item.");
+          } catch (uploadError) {
+            event.currentTarget.value = "";
+            setMessage("");
+            setError(uploadError instanceof Error ? uploadError.message : "Upload failed.");
+          } finally {
+            setUploading(false);
+          }
         }}
       />
       <p id={helpId} className="field-help">
-        Optional. Max 8 MB. Choosing a file uploads it to Supabase and replaces the URL on save.
+        Optional. Max 8 MB. Choosing a file uploads it to Supabase and fills the URL field.
       </p>
+      {message ? <p className="field-success">{message}</p> : null}
       {error ? (
         <p id={errorId} className="field-error" role="alert">
           {error}
@@ -211,7 +280,13 @@ function SocialForm({ item }: { item?: SocialLink }) {
         </div>
         <Field label="URL" name="url" defaultValue={item?.url} required />
         <Field label="Icon image URL" name="icon_image_url" defaultValue={item?.iconImageUrl} />
-        <FileField label="Upload icon image to Supabase" name="social_icon_file" accept="image/*" />
+        <FileField
+          label="Upload icon image to Supabase"
+          name="social_icon_file"
+          accept="image/*"
+          folder="socials"
+          targetName="icon_image_url"
+        />
         <div className="form-row">
           <Field label="Sort order" name="sort_order" type="number" defaultValue={item?.sortOrder ?? 0} />
           <Published defaultChecked={item?.published ?? true} />
@@ -281,7 +356,13 @@ function ProjectForm({ item }: { item?: Project }) {
           <Field label="Repository URL" name="repo_url" defaultValue={item?.repoUrl} />
         </div>
         <Field label="Image URL" name="image_url" defaultValue={item?.imageUrl} />
-        <FileField label="Upload project image to Supabase" name="project_image_file" accept="image/*" />
+        <FileField
+          label="Upload project image to Supabase"
+          name="project_image_file"
+          accept="image/*"
+          folder="projects"
+          targetName="image_url"
+        />
         <Field label="Image alt text" name="image_alt" defaultValue={item?.imageAlt} />
         <div className="form-row">
           <Field label="Sort order" name="sort_order" type="number" defaultValue={item?.sortOrder ?? 0} />
@@ -308,7 +389,14 @@ function CertificationForm({ item }: { item?: Certification }) {
           <Field label="Credential URL" name="credential_url" defaultValue={item?.credentialUrl} />
         </div>
         <Field label="Certificate image/PDF URL" name="file_url" defaultValue={item?.fileUrl} />
-        <FileField label="Upload certificate image/PDF to Supabase" name="certificate_file" accept="image/*,application/pdf" />
+        <FileField
+          label="Upload certificate image/PDF to Supabase"
+          name="certificate_file"
+          accept="image/*,application/pdf"
+          folder="certifications"
+          targetName="file_url"
+          fileTypeTargetName="file_type"
+        />
         <Field label="File type" name="file_type" defaultValue={item?.fileType} />
         <Field label="Skills, comma separated" name="skills" defaultValue={item?.skills.join(", ")} />
         <div className="form-row">

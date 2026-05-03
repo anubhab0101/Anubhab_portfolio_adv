@@ -17,6 +17,26 @@ type UploadedMedia = {
   url: string;
   contentType: string;
 };
+type PrepareMediaUploadInput = {
+  filename: string;
+  contentType: string;
+  size: number;
+  folder: string;
+};
+type PreparedMediaUpload = {
+  ok: boolean;
+  message: string;
+  token: string;
+  path: string;
+  publicUrl: string;
+};
+type RecordMediaUploadInput = {
+  path: string;
+  url: string;
+  filename: string;
+  contentType: string;
+  size: number;
+};
 
 const portfolioBucket = "portfolio-media";
 
@@ -73,12 +93,16 @@ function getUploadFile(formData: FormData, key: string) {
 }
 
 function assertAllowedMedia(file: File) {
+  assertAllowedMediaDetails(file.type, file.size);
+}
+
+function assertAllowedMediaDetails(contentType: string, size: number) {
   const allowedTypes = new Set(["image/jpeg", "image/png", "image/webp", "image/gif", "application/pdf"]);
-  if (!allowedTypes.has(file.type)) {
+  if (!allowedTypes.has(contentType)) {
     throw new Error("Only JPG, PNG, WebP, GIF, or PDF files are allowed.");
   }
 
-  if (file.size > 8 * 1024 * 1024) {
+  if (size > 8 * 1024 * 1024) {
     throw new Error("File must be 8 MB or smaller.");
   }
 }
@@ -304,6 +328,52 @@ export async function saveCertificationAction(formData: FormData) {
 
 export async function deleteCertificationAction(formData: FormData) {
   await deleteRow("certifications", formData);
+}
+
+export async function prepareMediaUploadAction(input: PrepareMediaUploadInput): Promise<PreparedMediaUpload> {
+  await requireAdmin();
+  assertAllowedMediaDetails(input.contentType, input.size);
+
+  const safeFolder = input.folder.toLowerCase().replace(/[^a-z0-9-]/g, "-");
+  const path = `${safeFolder}/${Date.now()}-${safeFilename(input.filename)}`;
+  const supabase = createSupabaseServiceClient();
+  const result = await supabase.storage.from(portfolioBucket).createSignedUploadUrl(path);
+
+  assertMutation(result.error);
+  if (!result.data) {
+    throw new Error("Could not prepare Supabase upload URL.");
+  }
+
+  const {
+    data: { publicUrl }
+  } = supabase.storage.from(portfolioBucket).getPublicUrl(path);
+
+  return {
+    ok: true,
+    message: "Upload URL ready.",
+    token: result.data.token,
+    path,
+    publicUrl
+  };
+}
+
+export async function recordMediaUploadAction(input: RecordMediaUploadInput) {
+  const user = await requireAdmin();
+  assertAllowedMediaDetails(input.contentType, input.size);
+
+  const supabase = createSupabaseServiceClient();
+  const result = await supabase.from("media_assets").insert({
+    bucket: portfolioBucket,
+    path: input.path,
+    url: input.url,
+    filename: input.filename,
+    content_type: input.contentType,
+    size_bytes: input.size,
+    created_by: user.id
+  });
+
+  assertMutation(result.error);
+  await refreshPortfolio();
 }
 
 export async function saveTestimonialAction(formData: FormData) {
