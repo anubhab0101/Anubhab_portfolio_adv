@@ -1,6 +1,6 @@
 "use client";
 
-import { createElement, useEffect, useMemo, useState, useSyncExternalStore, type CSSProperties } from "react";
+import { createElement, useEffect, useMemo, useRef, useState, useSyncExternalStore, type CSSProperties } from "react";
 import type { PortfolioData } from "@/lib/types";
 
 type Props = {
@@ -83,7 +83,8 @@ function renderHeroHeadline(headline: string) {
 export function PortfolioPage({ data }: Props) {
   const theme = useSyncExternalStore(subscribeToThemeChanges, getThemeSnapshot, getServerThemeSnapshot);
   const [activeCertification, setActiveCertification] = useState(0);
-  const [certLayout, setCertLayout] = useState({ width: 336, gap: 24 });
+  const [certLayout, setCertLayout] = useState({ width: 336, gap: 24, viewport: 980 });
+  const certificationCarouselRef = useRef<HTMLDivElement>(null);
   const darkMode = theme === "dark";
 
   const skillsByCategory = useMemo(() => {
@@ -97,15 +98,18 @@ export function PortfolioPage({ data }: Props) {
 
   useEffect(() => {
     const updateCertLayout = () => {
+      const carouselWidth = certificationCarouselRef.current?.clientWidth || Math.min(window.innerWidth, 980);
+
       if (window.matchMedia("(max-width: 768px)").matches) {
         setCertLayout({
-          width: Math.min(320, Math.max(280, window.innerWidth * 0.82)),
-          gap: 16
+          width: Math.min(300, Math.max(236, carouselWidth - 32)),
+          gap: 14,
+          viewport: carouselWidth
         });
         return;
       }
 
-      setCertLayout({ width: 336, gap: 24 });
+      setCertLayout({ width: 336, gap: 24, viewport: carouselWidth });
     };
 
     updateCertLayout();
@@ -586,7 +590,7 @@ export function PortfolioPage({ data }: Props) {
           <div className="content-panel">
             <h2 className="animate-on-scroll">Certifications:</h2>
             {data.certifications.length > 0 ? (
-              <div className="certifications-carousel animate-on-scroll">
+              <div className="certifications-carousel animate-on-scroll" ref={certificationCarouselRef}>
                 <button
                   className="cert-carousel-btn left"
                   type="button"
@@ -603,9 +607,10 @@ export function PortfolioPage({ data }: Props) {
                     {
                       "--cert-card-width": `${certLayout.width}px`,
                       "--cert-card-gap": `${certLayout.gap}px`,
-                      transform: `translateX(calc(50% - ${
-                        (visibleCertification + 0.5) * (certLayout.width + certLayout.gap)
-                      }px))`
+                      transform: `translateX(${
+                        (certLayout.viewport - certLayout.width) / 2 -
+                        visibleCertification * (certLayout.width + certLayout.gap)
+                      }px)`
                     } as CSSProperties
                   }
                 >
